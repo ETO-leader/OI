@@ -26,7 +26,7 @@ int main(){
         for(auto&i:a) cin>>i;
         const auto avgspc=accumulate(a.begin(),a.begin()+k,0ll)%MOD*math.inv(k)%MOD,
             avgnrm=accumulate(a.begin()+k,a.end(),0ll)%MOD*math.inv(n-k)%MOD;
-        const auto expspc=(((n-k+2)/2)*k%MOD)*math.inv(n-k+1)%MOD;
+        const auto expspc=((1ll*(n-k+2)/2)*k%MOD)*math.inv(n-k+1)%MOD;
         const auto expnrm=(n-k+1)/2;
         const auto ansa=(avgspc*expspc+avgnrm*expnrm)%MOD;
         const auto ansb=(accumulate(a.begin(),a.end(),0ll)+MOD-ansa)%MOD;
