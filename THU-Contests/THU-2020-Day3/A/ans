@@ -1,0 +1,8 @@
+BusRdX 1
+MemoryRd 1
+MemoryWr 1
+BusRdX 2
+FlushOpt 1
+MemoryWr 2
+BusRd 1
+FlushOpt 2

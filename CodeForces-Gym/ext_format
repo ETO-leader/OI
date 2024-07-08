@@ -1,0 +1,70 @@
+#include<string>
+#include<sstream>
+#include<assert.h>
+
+#if not defined(__EXT_FORMAT)
+
+#define __EXT_FORMAT 1
+
+namespace fmt{
+    template<typename _Ty, typename... _Args>
+    auto format(const char*str,_Ty a)->std::string{
+        size_t loc=0;
+        std::string res;
+        while(str[loc]!='\0'){
+            if(str[loc]=='\\'){
+                ++loc;
+                res+=str[loc];
+                continue;
+            }
+            if(str[loc]=='{'){
+                assert(str[loc+1]=='}');
+                std::stringstream sstr;
+            #if defined(__float_setprecision)
+                sstr<<fixed<<setprecision(__float_setprecision)<<a;
+            #else
+                sstr<<a;
+            #endif
+                res+=sstr.str();
+                loc+=2;
+                continue;
+            }
+            res+=str[loc];
+            ++loc;
+        }
+        return res;
+    }
+    template<typename _Ty,typename... _Args>
+    auto format(const char*str,_Ty a,_Args... arg)->std::string{
+        size_t loc=0;
+        std::string res;
+        while(str[loc]!='\0'){
+            if(str[loc]=='\\'){
+                ++loc;
+                res+=str[loc];
+                continue;
+            }
+            if(str[loc]=='{'){
+                assert(str[loc+1]=='}');
+                std::stringstream sstr;
+            #if defined(__float_setprecision)
+                sstr<<fixed<<setprecision(__float_setprecision)<<a;
+            #else
+                sstr<<a;
+            #endif
+                res+=sstr.str();
+                res+=format(str+loc+2,arg...);
+                break;
+            }
+            res+=str[loc];
+            ++loc;
+        }
+        return res;
+    }
+    template<typename... _Args>
+    auto format(std::string s,_Args... arg){
+        return format(s.c_str(),arg...);
+    }
+}
+
+#endif
