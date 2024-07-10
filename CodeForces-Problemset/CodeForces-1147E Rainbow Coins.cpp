@@ -14,7 +14,9 @@
 #define __GRADER_H 1
 
 extern std::vector<bool> Relation(std::vector<std::pair<int,int>> rls){
-    std::cout<<'A'<<' '<<rls.size()<<' ';
+    if(rls.empty()) return std::vector<bool>();
+    std::cout<<'Q'<<' '<<rls.size()<<' ';
+    std::cout.flush();
     for(auto&[a,b]:rls) std::cout<<a<<' '<<b<<' ';
     std::cout<<'\n';
     std::cout.flush();
@@ -25,16 +27,19 @@ extern std::vector<bool> Relation(std::vector<std::pair<int,int>> rls){
 }
 
 extern void Answer(std::vector<int> a,std::vector<int> b,std::vector<int> c){
-    std::cout<<'Q'<<' '<<a.size()<<' '<<b.size()<<' '<<c.size()<<'\n';
+    std::cout<<'A'<<' '<<a.size()<<' '<<b.size()<<' '<<c.size()<<'\n';
+    std::cout.flush();
     for(auto&x:{a,b,c}){
         for(auto&i:x) std::cout<<i<<' ';
         std::cout<<'\n';
+        std::cout.flush();
     }
     std::cout.flush();
 }
 
 extern int CoinCount(){
     int n;std::cin>>n;
+    assert(n>-1);
     return n;
 }
 
@@ -62,7 +67,7 @@ public:
     }
     auto merge(int u,int v){
         u=findset(u);v=findset(v);
-        if(u>v) swap(u,v);
+        if(u<v) swap(u,v);
         f[u]=v;
     }
     dsu(int _n):f(_n){iota(f.begin(),f.end(),0);}
@@ -104,18 +109,25 @@ void Coins(){
         cir(i,0,k) if(i%4==m&&i+2<k){
             ask.push_back({blocks[i]+1,blocks[i+2]+1});
         }
-        upd(Relation(ask));
+        const auto rls=Relation(ask);
+        vector<bool> rlsx(k);
+        cir(i,0,k) if(i%4==m&&i+2<k) rlsx[i]=rls[i/4];
+        upd(rlsx);
     }
-    vector<int> col;
+    vector<int> col(k);
     array<vector<int>,3> cls;
-    col[0]=0;col[1]=2;
+    col[0]=0;
+    if(k>1) col[1]=1;
+    blocks.push_back(n);
+    blocks.push_back(n);
+    cir(i,blocks[0],blocks[1]) cls[0].push_back(i+1);
+    cir(i,blocks[1],blocks[2]) cls[1].push_back(i+1);
     auto mex=[&](int x,int y){
         set ax{0,1,2};
         if(ax.count(x)) ax.erase(x);
         if(ax.count(y)) ax.erase(y);
         return *ax.begin();
     };
-    blocks.push_back(n);
     cir(i,2,k){
         if(samenxt[i-2]) col[i]=col[i-2];
         else col[i]=mex(col[i-2],col[i-1]);
