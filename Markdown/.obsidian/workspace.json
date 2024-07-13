@@ -26,9 +26,21 @@
               "type": "graph",
               "state": {}
             }
+          },
+          {
+            "id": "e3a24a838bf51f56",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Solutions/CodeForces/CF1975F.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -94,6 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Solutions/CodeForces/CF1975F.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,6 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Solutions/CodeForces/CF1975F.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -131,7 +145,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Solutions/CodeForces/CF1975F.md"
+              }
             }
           }
         ]
@@ -151,8 +167,9 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "caaae2b157de420c",
+  "active": "e3a24a838bf51f56",
   "lastOpenFiles": [
+    "Solutions/CodeForces/CF1975F.md",
     "Solutions/CodeForces/CF1404E.md",
     "Solutions/CodeForces/CF1307G.md",
     "Solutions/CodeForces/CF1773G.md",
