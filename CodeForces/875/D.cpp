@@ -11,8 +11,7 @@ int main(){
         const int sqr=sqrt(n*2);
         for(auto&[a,b]:ar) cin>>a;
         for(auto&[a,b]:ar) cin>>b;
-        sort(ar.begin(),ar.end(),
-            [](arrab&a,arrab&b){return a.a<b.a;});
+        ranges::sort(ar,[](arrab&a,arrab&b){return a.a<b.a;});
         vector<unordered_map<int,int>> cnx(n+1);
         lint ans=0;
         for(auto&[a,b]:ar){
