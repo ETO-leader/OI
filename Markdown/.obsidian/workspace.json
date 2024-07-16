@@ -4,19 +4,27 @@
     "type": "split",
     "children": [
       {
-        "id": "9f515f898bea117a",
+        "id": "0116eec3716a2165",
         "type": "tabs",
         "children": [
           {
-            "id": "472e3b9f1fdcf0e4",
+            "id": "89376df33e24a543",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Solutions/CodeForces/CF79D.md",
+                "file": "Solutions/acmsguru/sgu137.md",
                 "mode": "source",
                 "source": false
               }
+            }
+          },
+          {
+            "id": "41e306988c5789c6",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
             }
           }
         ]
@@ -85,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Solutions/CodeForces/CF79D.md",
+                "file": "Solutions/acmsguru/sgu137.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Solutions/CodeForces/CF79D.md",
+                "file": "Solutions/acmsguru/sgu137.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Solutions/CodeForces/CF79D.md"
+                "file": "Solutions/acmsguru/sgu137.md"
               }
             }
           }
@@ -146,8 +154,10 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "472e3b9f1fdcf0e4",
+  "active": "89376df33e24a543",
   "lastOpenFiles": [
+    "Solutions/acmsguru/sgu137.md",
+    "Solutions/acmsguru",
     "Solutions/CodeForces/CF79D.md",
     "最大独立集.md",
     "Solutions/CodeForces/CF1975F.md",
