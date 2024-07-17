@@ -116,7 +116,8 @@
         "headb": "cpp",
         "modint": "cpp",
         "eformat": "cpp",
-        "ext_format": "cpp"
+        "ext_format": "cpp",
+        "print": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled",
     "problems.showCurrentInStatus": false,
