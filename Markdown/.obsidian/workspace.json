@@ -8,18 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "89376df33e24a543",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Solutions/acmsguru/sgu137.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "41e306988c5789c6",
             "type": "leaf",
             "state": {
@@ -93,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Solutions/acmsguru/sgu137.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Solutions/acmsguru/sgu137.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -132,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Solutions/acmsguru/sgu137.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -154,9 +138,12 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "89376df33e24a543",
+  "active": "41e306988c5789c6",
   "lastOpenFiles": [
+    "Solutions/CodeForces/CF1557E.md",
+    "Solutions/Universal Online Judge/UOJ890.md",
     "Solutions/acmsguru/sgu137.md",
+    "Solutions/Universal Online Judge",
     "Solutions/acmsguru",
     "Solutions/CodeForces/CF79D.md",
     "最大独立集.md",
