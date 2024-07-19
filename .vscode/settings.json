@@ -117,7 +117,13 @@
         "modint": "cpp",
         "eformat": "cpp",
         "ext_format": "cpp",
-        "print": "cpp"
+        "print": "cpp",
+        "expected": "cpp",
+        "spanstream": "cpp",
+        "stacktrace": "cpp",
+        "stdfloat": "cpp",
+        "generator": "cpp",
+        "text_encoding": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled",
     "problems.showCurrentInStatus": false,
