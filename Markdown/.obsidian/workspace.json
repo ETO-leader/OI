@@ -4,24 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "0116eec3716a2165",
+        "id": "a600f5494dba5045",
         "type": "tabs",
         "children": [
           {
-            "id": "41e306988c5789c6",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {}
-            }
-          },
-          {
-            "id": "a70d5c02045df52f",
+            "id": "10e9874750a87190",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Solutions/CodeForces/CF1951G.md",
+                "file": "Notes/OIFC Liankao NOI2024 Training Review.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Notes/OIFC Liankao NOI2024 Training Review.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -109,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Notes/OIFC Liankao NOI2024 Training Review.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -130,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Notes/OIFC Liankao NOI2024 Training Review.md"
+              }
             }
           }
         ]
@@ -150,14 +146,20 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "41e306988c5789c6",
+  "active": "10e9874750a87190",
   "lastOpenFiles": [
+    "Solutions/CodeForces/CF1557E.md",
+    "Notes/OIFC Liankao NOI2024 Training Review.md",
+    "Solutions/CodeForces/CF R 956 (Div.2).md",
+    "倒数.md",
+    "Notes/source.md",
+    "Notes/OIFC Liankao NOI2024 Training Review - 副本.md",
+    "网络流.md",
     "Solutions/CodeForces/CF1951G.md",
+    "Schwartz-Zippel引理.md",
     "Solutions/CodeForces/CF1975F.md",
     "Notes/tricks.md",
     "Solutions/CodeForces/CF1981F.md",
-    "Solutions/CodeForces/CF R 956 (Div.2).md",
-    "Solutions/CodeForces/CF1557E.md",
     "Solutions/Universal Online Judge/UOJ890.md",
     "Solutions/acmsguru/sgu137.md",
     "Solutions/Universal Online Judge",
