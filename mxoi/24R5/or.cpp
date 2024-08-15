@@ -15,18 +15,21 @@ int main(){
     int T;fcin>>T;
     while(T--) [&](){
         lint l,r;fcin>>l>>r;
-        if(l==r) return fcout<<1<<'\n',void();
-        auto p=60;
-        for(;((l>>p)&1)==((r>>p)&1);--p);
-        const auto posw=(1ll<<p);
-        const auto lx=l&(posw-1);
-        auto rxw=r&(posw-1);
-        auto rw=1ll;
-        while((rw<<=1)<rxw+1);
-        const auto rx=rw-1;
-        auto ans=(r|rx)-l+1;
-        ans+=(posw-lx)-max(rx-lx+1,0ll);
-        fcout<<ans<<'\n';
+        fcout<<[&](){
+            for(auto p=62;~p;--p){
+                if((l>>p)!=(r>>p)){
+                    const auto pw=1ll<<p,x=pw-l,y=[&](lint w){
+                        auto res=1ll;
+                        for(;res<w;res<<=1);
+                        return res;
+                    }(r-pw+1);
+                    return x+min(x+y,pw);
+                }
+                (l|=(1ll<<p))^=(1ll<<p);
+                (r|=(1ll<<p))^=(1ll<<p);
+            }
+            return 1ll;
+        }()<<'\n';
     }();
     return 0;
 }
