@@ -11,8 +11,12 @@
             "id": "4949a457fcd32b9b",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Temp/untitled.md",
+                "mode": "preview",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Temp/untitled.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Temp/untitled.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Temp/untitled.md"
+              }
             }
           }
         ]
@@ -140,6 +148,8 @@
   },
   "active": "4949a457fcd32b9b",
   "lastOpenFiles": [
+    "Temp",
+    "Temp/untitled.md",
     "Notes/OIFC Liankao NOI2024 Training Review.md",
     "Solutions/CodeForces/CF1557E.md",
     "Solutions/CodeForces/CF R 956 (Div.2).md",
