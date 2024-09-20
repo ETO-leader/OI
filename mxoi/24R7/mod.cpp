@@ -15,42 +15,28 @@ using lint=long long;
 static constexpr auto MOD=998244353;
 int main(){
     ios::sync_with_stdio(false),cin.tie(0);
-    int n;fcin>>n;
-    if(n==2){
-        vector vis(507,vector<int>(507));
-        auto dfs=[&](auto __self,int x,int y)->int {
-            if(vis[x][y]) return 0;
-            vis[x][y]=true;
-            auto res=1;
-            cir(i,1,max(x,y)+1) res+=__self(__self,x%i,y%i);
-            return res;
-        };
-        int a,b;fcin>>a>>b;
-        fcout<<dfs(dfs,a,b)<<'\n';
-    }else{
-        vector<int> a(n);
-        for(auto&i:a) fcin>>i;
-        if(*max_element(a.begin(),a.end())>21){
-            const auto arr=vector{582309211,915057316,915057328,582309199,249561092,249561096,748683265,499122182,998244339,831870296};
-            vector<lint> f{2,3,5,8,14,24,43,77,140,256};
-            f.resize(n);
-            cir(p,10,n){
-                cir(x,0,10) (f[p]+=f[p-x-1]*arr[x])%=MOD;
+    int n;fcin>>n;vector<int> a(n);
+    for(auto&i:a) fcin>>i;
+    vector<int> c(*max_element(a.begin(),a.end())+1);
+    for(auto&i:a) ++c[i];
+    const auto m=(int)(c.size())-1;
+    auto ans=1ll;
+    cir(i,1,m+1){
+        vector f(m+1,vector<lint>(2));
+        f[i-1][0]=1;
+        auto las=i-1;
+        cir(x,i,m+1){
+            if(c[x]){
+                cir(p,1,i+1) if(x-p>i-2){
+                    (f[x][1]+=f[x-p][0]+f[x-p][1])%=MOD;
+                }
+                las=x;
+            }else{
+                f[x][0]=f[las][1];
             }
-            fcout<<f[n-1]<<'\n';
-            exit(0);
         }
-        const auto st=set(a.begin(),a.end());
-        const auto w=vector(st.begin(),st.end());
-        set<vector<int>> ans;
-        cir(s,0,(1<<20)){
-            auto to=w;
-            for(auto x=20;x;--x) if(s&(1<<(x-1))){
-                for(auto&i:to) i%=x;
-            }
-            ans.insert(to);
-        }
-        fcout<<ans.size()<<'\n';
+        (ans+=f[m][1])%=MOD;
     }
+    fcout<<ans<<'\n';
     return 0;
 }
