@@ -1,6 +1,6 @@
 import random as rnd
 
-N=6
+N=4
 
 print(1)
 print(N)

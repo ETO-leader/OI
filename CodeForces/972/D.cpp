@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
+using lint=long long;
 static constexpr auto _inf=(int)(1e9+7);
 class sparsetable{
 private:
@@ -36,74 +37,69 @@ int main(){
         sparsetable sta(a),stb(b);
         vector<pair<int,int>> aw(n);
         vector<int> prea(n),sufa(n),preb(n),sufb(n);
+        map<int,int> spa,spb,ssa,ssb,vla,vlb,vra,vrb;
         cir(i,0,n){
             prea[i]=sta.query(0,i-1);
             preb[i]=stb.query(0,i-1);
             sufa[i]=sta.query(i+1,n-1);
             sufb[i]=stb.query(i+1,n-1);
         }
-        const auto swpw=[&](int i,int lm){
-            return gcd(prea[i],gcd(stb.query(i,lm),sufa[lm]))+
-                 gcd(preb[i],gcd(sta.query(i,lm),sufb[lm]));
+        // Query swapped range [l,r]
+        const auto aska=[&](int l,int r){
+            return gcd(prea[l],gcd(stb.query(l,r),sufa[r]));
         };
-        auto ans=-1;
-        cir(i,0,n){
-            auto ansx=pair(-1,-1);
-            [&](){
-                auto l=i+1,r=max(n-2,i);
-                while(r-l+1>5){
-                    const auto lm=l+(r-l)/3,rm=l+(r-l)/3*2;
-                    const auto lw=swpw(i,lm);
-                    const auto rw=swpw(i,rm);
-                    lw>rw?r=rm:l=lm;
-                }
-                cir(p,l,r+1) ansx=max(ansx,pair(swpw(i,p),p));
-            }();
-            [&](){
-                auto l=i+1,r=max(n-2,i);
-                while(r-l+1>5){
-                    const auto lm=l+(r-l)/3,rm=l+(r-l)/3*2;
-                    const auto lw=swpw(i,lm);
-                    const auto rw=swpw(i,rm);
-                    lw<rw?l=lm:r=rm;
-                }
-                cir(p,l,r+1) ansx=max(ansx,pair(swpw(i,p),p));
-            }();
-            ans=max(ans,ansx.first);
-            ans=max(ans,swpw(i,n-1));
-            ans=max(ans,swpw(i,i));
-            aw[i]=ansx;
+        const auto askb=[&](int l,int r){
+            return gcd(preb[l],gcd(sta.query(l,r),sufb[r]));
+        };
+        ssa[aska(0,n-1)]=ssb[askb(0,n-1)]=n-1;
+        for(auto c=-1;auto&i:prea) spa[i]=++c;
+        for(auto c=-1;auto&i:preb) spb[i]=++c;
+        for(auto c=n;auto&i:views::reverse(sufa)) ssa[i]=--c;
+        for(auto c=n;auto&i:views::reverse(sufb)) ssb[i]=--c;
+        auto ansmx=0;
+        for(auto&[wa,l]:spa) for(auto&[wb,r]:ssa){
+            const auto nw=aska(l,r);
+            if(!vla.contains(nw)) vla[nw]=-1;
+            if(!vra.contains(nw)) vra[nw]=n;
+            vla[nw]=max(vla[nw],l);
+            vra[nw]=min(vra[nw],r);
         }
-        auto cnt=0ll;
-        auto fl=[&](int i,int p,int lx,int rx){
-            auto l=lx,r=min(rx,p),ansr=p+1;
-            while(l-1<r){
-                const auto mid=midpoint(l,r);
-                swpw(i,mid)==ans?((ansr=mid),(r=mid-1)):(l=mid+1);
-            }
-            return ansr;
-        };
-        auto fr=[&](int i,int p,int lx,int rx){
-            auto l=max(p+1,lx),r=rx,ansr=p;
-            while(l-1<r){
-                const auto mid=midpoint(l,r);
-                swpw(i,mid)==ans?((ansr=mid),(l=mid+1)):(r=mid-1);
-            }
-            return ansr;
-        };
-        cir(i,1,n-1){
-            const auto[w,p]=aw[i];
-            auto lx=i,rx=n-1;
-            auto cx=0;
-            while((++cx)<20&&lx<rx+1&&swpw(i,lx)==ans) ++lx,++cnt,++cx;
-            cx=0;
-            while((++cx)<20&&lx<rx+1&&swpw(i,rx)==ans) --rx,++cnt,++cx;
-            if(w!=ans||lx>rx) continue;
-            cnt+=fr(i,p,lx,rx)-fl(i,p,lx,rx)+1;
+        for(auto&[wa,l]:spb) for(auto&[wb,r]:ssb){
+            const auto nw=askb(l,r);
+            if(!vlb.contains(nw)) vlb[nw]=-1;
+            if(!vrb.contains(nw)) vrb[nw]=n;
+            vlb[nw]=max(vlb[nw],l);
+            vrb[nw]=min(vrb[nw],r);
         }
-        cnt+=(swpw(n-1,n-1)==ans);
-        cir(p,0,n) cnt+=(swpw(0,p)==ans);
-        cout<<ans<<' '<<cnt<<'\n';
+        for(auto&[wa,ra]:vra) for(auto&[wb,rb]:vrb){
+            if(!(wa&&wb)) continue;
+            const auto la=vla[wa],lb=vlb[wb];
+            // clog<<' '<<wa<<' '<<wb<<' '<<'['<<la<<','<<ra<<"] ["<<lb<<','<<rb<<']'<<'\n';
+            const auto rl=min(la,lb),lr=max(ra,rb);
+            // clog<<wa<<' '<<wb<<' '<<rl<<' '<<lr<<'\n';
+            if((!(aska(rl,lr)%wa))&&(!(askb(rl,lr)%wb))) ansmx=max(ansmx,wa+wb);
+        }
+        auto cmethod=0ll;
+        set<pair<int,int>> cnt;
+        auto check=[&](int wa,int wb){
+            if(cnt.contains({wa,wb})) return;
+            cnt.emplace(wa,wb);
+            vector f(n,vector<lint>(3));
+            f[0][0]=(!(a[0]%wa))&&(!(b[0]%wb));
+            f[0][1]=(!(b[0]%wa))&&(!(a[0]%wb));
+            f[0][2]=f[0][1];
+            cir(i,1,n){
+                f[i][0]=f[i-1][0]*((!(a[i]%wa))&&(!(b[i]%wb)));
+                f[i][1]=(f[i-1][1]+f[i-1][0])*((!(b[i]%wa))&&(!(a[i]%wb)));
+                f[i][2]=f[i][1]+f[i-1][2]*((!(a[i]%wa))&&(!(b[i]%wb)));
+            }
+            cmethod+=f[n-1][2];
+        };
+        for(auto&[wa,ra]:vra) for(auto&[wb,rb]:vrb){
+            if((!wa)||(!wb)||wa+wb!=ansmx) continue;
+            check(wa,wb);check(wb,wa); 
+        }
+        println("{} {}",ansmx,cmethod);
     }();
     return 0;
 }
