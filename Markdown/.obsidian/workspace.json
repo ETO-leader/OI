@@ -4,22 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "1811e694b6c6b915",
+        "id": "c0d087b0bbbff174",
         "type": "tabs",
         "children": [
           {
-            "id": "4949a457fcd32b9b",
+            "id": "5452e1f83ea18db8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Temp/untitled.md",
-                "mode": "preview",
+                "file": "7fa4/H3.3.5.1.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "8393f15c0e34da9c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "H3.3.5.3.md",
+                "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Temp/untitled.md",
+                "file": "H3.3.5.3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Temp/untitled.md",
+                "file": "H3.3.5.3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Temp/untitled.md"
+                "file": "H3.3.5.3.md"
               }
             }
           }
@@ -146,10 +159,13 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "4949a457fcd32b9b",
+  "active": "8393f15c0e34da9c",
   "lastOpenFiles": [
-    "Temp",
+    "7fa4/H3.3.5.1.md",
+    "H3.3.5.3.md",
+    "7fa4",
     "Temp/untitled.md",
+    "Temp",
     "Notes/OIFC Liankao NOI2024 Training Review.md",
     "Solutions/CodeForces/CF1557E.md",
     "Solutions/CodeForces/CF R 956 (Div.2).md",

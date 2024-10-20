@@ -71,12 +71,13 @@ int main(){
             if(!inrange(nx,ny)) continue;
             if(mp[nx][ny]!='#') continue;
             auto gc=getconnect(nx,ny);
-            if(gc.size()!=1) continue;
+            if(gc.size()<2) continue;
             if(gc==tx) continue;
             for(auto&i:tx) gc.insert(i);
             vector ax(gc.begin(),gc.end());
-            // clog<<ax[0]<<' '<<ax[1]<<'\n';
-            ++cxd[{ax[0],ax[1]}];++cxd[{ax[1],ax[0]}];
+            set<pair<int,int>> qx;
+            for(auto&i:ax) for(auto&j:ax) if(i!=j) qx.emplace(i,j);
+            for(auto&[a,b]:qx) ++cxd[{a,b}];
         }
     }
     const auto sp=id[0][0],ep=id[n-1][m-1];

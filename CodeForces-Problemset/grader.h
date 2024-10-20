@@ -1,15 +1,11 @@
-#include<string>
-
-#if not defined(__GRADER_H)
+#ifndef(__GRADER_H)
 
 #define __GRADER_H 1
 
-extern void initPos(int r,int c);
+extern void count(int);
 
-extern std::string kingMove();
+extern void remove(int);
 
-extern void queenMove(int r,int c);
-
-extern void playChess();
+extern void answer(int);
 
 #endif

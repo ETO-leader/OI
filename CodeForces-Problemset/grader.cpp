@@ -11,9 +11,10 @@
     #define Info std::clog
 #endif
 
-// 烂尾咯
+
 
 int main(int argc,char*argv[]){
+    registerTestlibCmd(argc,argv);
     return 0;
 }
 
