@@ -48,29 +48,23 @@ int main(){
     for(auto i=n-1;~i;--i){
         if(rgp.empty()||a[rgp.back()]>a[i]) rgp.push_back(i),invaild.insert(i);
     }
-    for(auto&i:lfp) clog<<i<<' ';
-    clog<<'\n';
-    for(auto&i:rgp) clog<<i<<' ';
-    clog<<'\n';
     reverse(rgp.begin(),rgp.end());
     for(auto&i:lfp) lfw.push_back(a[i]);
     for(auto&i:rgp) rgw.push_back(a[i]);
     vector<vector<tuple<int,int,int>>> ops(n);
-    const auto rc=(int)(rgp.size())-1;
     cir(i,0,n) if(!invaild.count(i)){
         const auto lp=lower_bound(lfp.begin(),lfp.end(),i)-lfp.begin();
         const auto lw=lower_bound(lfw.begin(),lfw.end(),a[i])-lfw.begin();
         const auto rp=lower_bound(rgp.begin(),rgp.end(),i)-rgp.begin();
         const auto rw=lower_bound(rgw.begin(),rgw.end(),a[i])-rgw.begin();
-        clog<<i<<"<-->"<<a[i]<<" --> "<<lp<<' '<<lw<<' '<<rp<<' '<<rw<<'\n';
-        if(lp-1<lw||max(rp,rw)>rc) continue;
-        ops[lp].emplace_back(max(rp,rw),rc,1);
-        ops[lw].emplace_back(max(rp,rw),rc,-1);
+        if(lp-1<lw||rw-1<rp) continue;
+        ops[lw].emplace_back(rp,rw-1,1);
+        ops[lp].emplace_back(rp,rw-1,-1);
     }
     auto ans=0;
     segment sg(n);
     cir(i,0,n){
-        for(auto&[l,r,w]:ops[i]) sg.update(l,r,w),clog<<i<<' '<<l<<' '<<r<<' '<<w<<'\n';
+        for(auto&[l,r,w]:ops[i]) sg.update(l,r,w);
         ans=max(ans,sg.max());
     }
     fcout<<ans*2+1<<'\n';
