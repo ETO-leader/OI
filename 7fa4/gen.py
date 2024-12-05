@@ -1,28 +1,11 @@
-import sys
-import random as rnd
+from random import randint
 
-def generateMap(R,C):
-    res = [['.' for qwq in range(C)] for tat in range(R)]
-    for i in range(R):
-        for j in range(C):
-            res[i][j] = '......xxAB'[rnd.randint(0,9)]
-    return res
+n = 100000
 
-rgx = int(sys.argv[1])
-rgy = int(sys.argv[2])
+print(n, 1)
 
-mp=generateMap(rgx,rgy)
+for i in range(n): print(randint(1, 100000), end=' ')
 
-print(2,rgx,rgy)
+for i in range(2, n + 1): print(i - 1, i)
 
-for i in range(1,3):
-    rx = rnd.randint(0,rgx-1)
-    ry = rnd.randint(0,rgy-1)
-    while mp[rx][ry].isdigit():
-        rx = rnd.randint(0,rgx-1)
-        ry = rnd.randint(0,rgy-1)
-    mp[rx][ry] = str(i)
-
-for i in mp:
-    for j in i: print(j,end='')
-    print()
+print(1, 1)
