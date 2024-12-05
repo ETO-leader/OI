@@ -29,9 +29,9 @@ int main(){
     auto getlef=[&](auto __self,int p)->int {
         return lef[p]==p?p:lef[p]=__self(__self,lef[p]);
     };
+    cir(i,0,n) w[i].push(a[i]);
     cir(i,0,n){
         auto p=i;
-        // while(p+1<n&&a[p+1]<a[p]+1) ++p;
         cir(x,i,p+1) w[i].push(a[x]),lef[x]=i;
         const auto left=(p-i+2)/2;
         while((int)(w[i].size())>left) w[i].pop();
