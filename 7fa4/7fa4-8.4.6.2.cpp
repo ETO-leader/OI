@@ -2,47 +2,13 @@
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
 class casereader{
-private:
-    union datatype{
-        int*i32;
-        string*str;
-        datatype(int*x):i32(x){}
-        datatype(string*x):str(x){}
-    };
-    vector<datatype> ax;
-    int cur;
-    template<typename _Ty>
-    auto readarg(int c=1){
-        auto las=_Ty();
-        cir(i,0,c){
-            auto x=new _Ty();
-            cin>>*x;ax.emplace_back(x);
-            las=*x;
-        }
-        return las;
-    }
 public:
-    auto init(){
-        readarg<int>();
-        const auto q=readarg<int>();
-        cir(i,0,q){
-            const auto op=readarg<string>();
-            if(op=="A") readarg<int>(2);
-            else if(op=="Q") readarg<int>();
-        }
-    }
-    auto readargs(int&x){
-        x=*ax[cur].i32;delete ax[cur].i32;
-        ++cur;
-    }
-    auto readargs(string&s){
-        s=*ax[cur].str;delete ax[cur].str;
-        ++cur;
-    }
+    auto init(){}
+    auto readargs(int&x){cin>>x;}
+    auto readargs(string&s){cin>>s;}
     auto readargs(auto&x,auto&...args){
         readargs(x);readargs(args...);
     }
-    casereader():cur(0){}
 };
 class link_cut_tree{
 private:
@@ -83,13 +49,17 @@ private:
         push_down(u);
     }
     auto splay(int u){
-        for(down(u);nrt(u);rotate(u));
+        for(down(u);nrt(u);rotate(u)){
+            int fu=f[u];
+            if(nrt(fu)){
+                if(getch(fu)==getch(u)) rotate(fu);
+                else rotate(u);
+            }
+        }
     }
     auto access(int u){
         for(auto v=0;u;u=f[v=u]){
             splay(u);
-            assert(ls(u)!=u);
-            assert(rs(u)!=u);
             if(rs(u)){
                 tr[u].vsiz+=tr[rs(u)].siz;
                 tr[u].vmx.emplace(tr[rs(u)].siz);
@@ -103,6 +73,7 @@ private:
         }
     }
     auto find_by_order(int u,int rk){
+        push_down(u);
         if(tr[ls(u)].spsiz+1==rk) return u;
         return (rk<tr[ls(u)].spsiz+1)?find_by_order(ls(u),rk):find_by_order(rs(u),rk-tr[ls(u)].spsiz-1);
     }
@@ -129,7 +100,6 @@ public:
     }
     auto kthnode(int u,int v,int k){
         ++u;++v;split(u,v);splay(u);
-        assert(find_by_order(u,1)==u);
         return find_by_order(u,k+1)-1;
     }
     link_cut_tree(int _n):tr(_n+1),ch(_n+1),rev(_n+1),f(_n+1){
@@ -160,11 +130,11 @@ private:
         return lct.chksiz(u)<fr.getsize(u)/2+1;
     }
     auto getnode(int u,int v){
-        cerr<<u+1<<' '<<v+1<<' '<<lct.kthnode(u,v,1)+1<<'\n';
-        auto res=-1;
-        for(auto i=(int)(c.size())-1;~i;--i) if(fr.findset(u)==fr.findset(i)&&isvaild(i)) cerr<<"ANS = "<<i+1<<'\n',res=i;
-        cerr<<"------\n";
-        return res;
+        while(!isvaild(u)) u=lct.kthnode(u,v,1);
+        if(u==v) return u;
+        const auto nxt=lct.kthnode(u,v,1);
+        if(!isvaild(nxt)) return u;
+        return min(u,nxt);
     }
 public:
     auto link(int u,int v){
@@ -195,7 +165,6 @@ int main(){
         string op;inf.readargs(op);
         if(op=="A"){
             int u,v;inf.readargs(u,v);--u;--v;
-            // cerr<<'('<<u<<','<<v<<')'<<'\n';
             gr.link(u,v);
         }else if(op=="Q"){
             int u;inf.readargs(u);--u;
@@ -203,7 +172,6 @@ int main(){
         }else{
             cout<<gr.capxor()<<'\n';
         }
-        cout.flush();
     }
     return 0;
 }
