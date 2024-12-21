@@ -2,23 +2,24 @@
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
 vector<vector<int>> G;
-unordered_map<int,int> colcnt;
-vector<int> Ans,col,isl;
-void dfs(int u,int f=0){
-    colcnt[col[u]]++;
-    for(auto&i:G[u]) if(i!=f) dfs(i,u),isl[u]=true;
-    if((isl[u]=(!isl[u]))) Ans[u]=colcnt.size();
-    if(!(--colcnt[col[u]])) colcnt.erase(col[u]);
+vector<int> tag,Ans;
+void dfs(int u,int f=0,int cnt=0){
+    cnt+=tag[u];Ans[u]=cnt;
+    for(auto&i:G[u]) if(i!=f) dfs(i,u,cnt);
 }
 int main(){
     ios::sync_with_stdio(false),cin.tie(0);
-    int n,m;cin>>n>>m;G.resize(n);isl.resize(n);
-    Ans.resize(n);col.resize(n);
-    cir(i,1,n){
-        int nxt;cin>>nxt>>col[i];
-        G[nxt].push_back(i);G[i].push_back(nxt);
+    int n,m;cin>>n>>m;G.resize(n);
+    tag.resize(n);Ans.resize(n);
+    cir(i,0,n-1){
+        int u,v;cin>>u>>v;
+        G[u].push_back(v);G[v].push_back(u);
+    }
+    cir(i,0,m){
+        int a,b;cin>>a>>b;tag[a]+=b;
     }
     dfs(0);
-    cir(i,0,n) if(isl[i]) cout<<i<<' '<<Ans[i]<<'\n';
+    for(auto&i:Ans) cout<<i<<' ';
+    cout<<'\n';
     return 0;
 }
