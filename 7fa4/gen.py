@@ -1,14 +1,13 @@
-from random import randint, shuffle
+from sys import argv
+from random import randint
 
-n = 100
-q = 198
 
-print(n, q)
+def main():
+    n = int(argv[1])
+    print(n)
+    for i in range(n):
+        print(randint(-1000,1000),randint(0,0),randint(1,50))
 
-es = [(randint(1, i - 1), i) for i in range(2, n + 1)]
+if __name__ == '__main__':
+    main()
 
-shuffle(es)
-
-for u, v in es:
-    print(f'A {u} {v}')
-    print(f'Q {u}')

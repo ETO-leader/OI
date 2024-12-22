@@ -1,27 +1,37 @@
 import math
 import matplotlib.pyplot as pl
 
-PI=math.pi
+class Painter:
+    PI=math.pi
 
-N=int(input())
+    def __init__(self,liml=-30,limr=30,limu=-30,limd=30):
+        pl.figure(figsize=(10.0,10.0),dpi=200)
+        pl.xlim(liml,limr)
+        pl.ylim(limu,limd)
 
-R=int(input())
+    def drawcir(self,cx,cy,R,label=''):
+        if label != '':
+            pl.text(cx+math.cos(self.PI/4)*(R-0.5),cy+math.sin(self.PI/4)*(R-0.5),label)
+        pl.plot([cx+math.cos(self.PI*2/10000*i)*R for i in range(10001)],[cy+math.sin(self.PI*2/10000*i)*R for i in range(10001)],label=label)
 
-pl.figure(figsize=(10.0,10.0),dpi=200)
+    def drawseg(self,x1,y1,x2,y2,label=''):
+        if label != '':
+            pl.text((x1+x2)/2,(y1+y2)/2,label)
+        pl.plot([x1,x2],[y1,y2],label=label)
 
-pl.xlim(-30,30)
-pl.ylim(-30,30)
+    def export(self,file='export.png'):
+        pl.savefig(file)
 
-def drawcir(cx,cy,r):
-    x=[]
-    y=[]
-    for i in range(10001):
-        x.append(cx+math.cos(PI*2/10000*i)*R)
-        y.append(cy+math.sin(PI*2/10000*i)*R)
-    pl.plot(x,y)
+if __name__=='__main__':
+    read = lambda : list(map(int,input().split()))
 
-for i in range(N):
-    x,y=map(float,input().split())
-    drawcir(x,y,R)
+    board=Painter(-1000,2000,-1000,2000)
 
-pl.savefig('export.png')
+    n = read()[0]
+
+    for i in range(n):
+        x, y, r = read()
+        board.drawcir(x,y,r,f'circle {i+1}')
+    
+    board.export()
+
