@@ -1,10 +1,15 @@
-import random as rnd
+from random import randint
 
-N=1999
+N = 100000
 
-print(1)
-print(N)
+def main():
+    print(N)
+    for i in range(N):
+        print(randint(1, 200000), end=' ')
+    print()
+    print(N)
+    for i in range(N):
+        print(randint(1, N), randint(1, N), end=' ')
 
-for i in range(N):
-    print(1000000000,end=' ')
-print()
+if __name__ == '__main__':
+    main()
