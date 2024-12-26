@@ -77,25 +77,34 @@ private:
     auto maintain(int u){
         tr[u].sum=tr[ls(u)].sum+tr[rs(u)].sum+tr[u].val;
     }
+    // auto rotate(int u){
+    //     const auto fu=f(u),gu=f(fu),c=(int)(dir(u));
+    //     if(nrt(fu)) tr[gu].ch[dir(fu)]=u;
+    //     assert(gu not_eq u);
+    //     f(u)=gu;
+    //     tr[fu].ch[c]=tr[u].ch[!c];f(tr[u].ch[!c])=fu;
+    //     tr[u].ch[!c]=fu;f(fu)=u;
+    //     maintain(fu);maintain(u);
+    // }
+    
     auto rotate(int u){
         const auto fu=f(u),gu=f(fu),c=(int)(dir(u));
         if(nrt(fu)) tr[gu].ch[dir(fu)]=u;
         f(u)=gu;
-        tr[fu].ch[c]=tr[u].ch[c^1];f(tr[u].ch[c^1])=fu;
-        tr[u].ch[c^1]=fu;f(fu)=u;
+        tr[fu].ch[c]=tr[u].ch[!c];f(tr[u].ch[!c])=fu;
+        tr[u].ch[!c]=fu;f(fu)=u;
         maintain(fu);maintain(u);
     }
     auto down(int u)->void{
+        cerr<<u<<' '<<f(u)<<'\n';
         if(nrt(u)) down(f(u));
         push_down(u);
     }
     auto splay(int u){
-        for(down(u);nrt(u);rotate(u)){
-            if(nrt(f(u))) rotate(dir(f(u))==dir(u)?f(u):u);
-        }
+        for(down(u);nrt(u);rotate(u));
     }
     auto access(int u){
-        for(int v=0;u;v=u,u=f(u)){
+        for(auto v=0;u;u=f(v=u)){
             splay(u);rs(u)=v;maintain(u);
         }
     }
@@ -135,24 +144,24 @@ private:
         ch[res]=ch[v];
         len[res]=len[u]+1;
         fail[res]=fail[v];
-        // lct.link(res,fail[res]);
-        // lct.initval(res,1);
+        lct.link(res,fail[res]);
+        lct.initval(res,1);
         return res;
     }
     auto appendc(int f,int u,int c){
         auto ux=f;len[u]=len[f]+1;
         while(ux>-1&&(!ch[ux][c])) ch[ux][c]=u,ux=fail[ux];
-        // lct.initval(u,1);
+        lct.initval(u,1);
         clog<<f<<' '<<u<<' '<<c<<" <--> "<<ux<<'\n';
         if(ux==-1) return fail[u]=0,lct.link(u,fail[u]),void();
         const auto v=ch[ux][c];
         if(len[v]==len[ux]+1){
-            fail[u]=v;// lct.link(u,v);
+            fail[u]=v;lct.link(u,v);
         }else{
             const auto cl=clone(ux,v);
             while(ux>-1&&ch[ux][c]==v) ch[ux][c]=cl,ux=fail[ux];
             fail[v]=fail[u]=cl;
-            // lct.link(u,cl);lct.link(v,cl);
+            lct.link(u,cl);lct.link(v,cl);
         }
     }
     auto append(int f,int u,int c){
@@ -184,8 +193,7 @@ public:
         }else{
             return 0;
         }
-        // return lct.query(0,u);
-        return -1;
+        return lct.query(0,u);
     }
     ext_suffixam(int _n):
         ch((_n<<1)+7),ctr((_n<<1)+7),
@@ -216,7 +224,7 @@ int main(){
             ax.clear();
             int rt,s;inf.readargs(rt,s);--rt;
             cir(i,0,s-1){
-                int u,v;char c;inf.readargs(u,v,c);--u;--v;--c;
+                int u,v;char c;inf.readargs(u,v,c);--u;--v;
                 ax.emplace_back(u,v,c);
             }
             sam.emplace_tree(rt,ax);
