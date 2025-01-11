@@ -2,65 +2,63 @@
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
 static constexpr int _inf=1e9+7;
-class ek_algorithm{
+class ssp{
 private:
     struct edge{
-        int v,fl,rev;int w;
+        int v,fl,w,rev;
     };
     vector<vector<edge>> gr;
-    vector<int> dis;
-    vector<int> fx,esid;
-    auto spfa(int ux){
-        queue<int> q;q.push(ux);
-        fill(dis.begin(),dis.end(),_inf);
-        fill(fx.begin(),fx.end(),-1);
-        fill(esid.begin(),esid.end(),-1);
-        vector<bool> inq(gr.size());
-        dis[ux]=0;
+    vector<int> fr,eid;
+    map<pair<int,int>,int> es;
+    auto spfa(int s,int t){
+        const auto n=(int)(gr.size());
+        vector<int> dis(n,_inf),rest(n),inq(n);
+        queue<int> q;q.emplace(s);
+        rest[s]=_inf;dis[s]=0;
         while(!q.empty()){
-            auto u=q.front();q.pop();
-            inq[u]=false;int c=-1;
-            for(auto&[v,fl,rev,w]:gr[u]){
-                ++c;
-                if((!fl)||dis[u]+w>dis[v]-1) continue;
-                dis[v]=dis[u]+w;fx[v]=u;esid[v]=c;
-                if(!inq[v]) q.push(v),inq[v]=true;
+            const auto u=q.front();q.pop();
+            inq[u]=false;
+            for(auto cnt=-1;auto&[v,fl,w,rev]:gr[u]) if(++cnt;dis[v]>dis[u]+w&&fl){
+                dis[v]=dis[u]+w;rest[v]=min(rest[u],fl);
+                fr[v]=u;eid[v]=cnt;
+                if(!inq[v]) q.emplace(v);
+                inq[v]=true;
             }
         }
+        return rest[t];
     }
-    auto flow(int s,int t,int&ans){
-        spfa(s);
-        if(dis[t]>_inf-1) throw exception();
-        auto u=t;int fl=_inf;
-        while(u!=s){
-            fl=min(fl,gr[fx[u]][esid[u]].fl);
-            u=fx[u];
+    auto update(int s,int t,int&cur){
+        const auto fl=spfa(s,t);
+        if(!fl) return false;
+        for(;t!=s;t=fr[t]){
+            const auto u=fr[t];
+            gr[u][eid[t]].fl-=fl;
+            gr[t][gr[u][eid[t]].rev].fl+=fl;
+            cur+=gr[u][eid[t]].w*fl;
         }
-        ans+=fl*dis[t];
-        u=t;
-        while(u!=s){
-            auto&ex=gr[fx[u]][esid[u]];
-            auto&re=gr[u][gr[fx[u]][esid[u]].rev];
-            ex.fl-=fl;re.fl+=fl;u=fx[u];
-        }
-        return fl;
+        return true;
     }
 public:
+    auto link(int u,int v,int fl,int w){
+        gr[u].emplace_back(v,fl,w,gr[v].size());
+        gr[v].emplace_back(u,0,-w,gr[u].size()-1);
+    }
     auto flow(int s,int t){
-        int cost=0,flw=0;
-        while(true) try{
-            flw+=flow(s,t,cost);
-        }catch(exception&){
-            break;
-        }
-        return pair(cost,flw);
+        auto ans=0;
+        while(update(s,t,ans));
+        return ans;
     }
-    auto insert(int u,int v,int fl,int w){
-        gr[u].push_back({v,fl,(int)(gr[v].size()),w});
-        gr[v].push_back({u,0,(int)(gr[u].size()-1),-w});
-    }
-    ek_algorithm(int _n):gr(_n+1),
-        dis(_n+1),fx(_n+1),esid(_n+1){}
+    // auto emplace_query(int u,int v){
+    //     es.emplace(pair(v,u),-1);
+    // }
+    // auto qedges(){
+    //     const auto n=(int)(gr.size());
+    //     cir(u,0,n){
+    //         for(auto&[v,fl,w,rev]:gr[u]) if(es.contains(pair(v,u))) es[pair(v,u)]=fl; 
+    //     }
+    //     return es;
+    // }
+    ssp(int _n):gr(_n),fr(_n),eid(_n){}
 };
 class nodegen{
 private:
@@ -79,23 +77,23 @@ int main(){
         int u,v;cin>>u>>v;
         grx[u].push_back(v);grx[v].push_back(u);
     }
-    ek_algorithm gr(n*200+7);
+    ssp gr(n*207+7);
     nodegen ngen;
     const auto s=ngen.getnode(),t=ngen.getnode();
     vector<int> lnds(n),nds(n);
     for(auto&i:nds) i=ngen.getnode();
-    for(auto&i:psx) gr.insert(s,nds[i-1],1,0);
+    for(auto&i:psx) gr.link(s,nds[i-1],1,0);
     cir(cx,0,199){
         swap(nds,lnds);
         for(auto&i:nds) i=ngen.getnode();
         cir(i,1,n+1){
-            gr.insert(lnds[i-1],nds[i-1],_inf,c*(i!=1));
+            gr.link(lnds[i-1],nds[i-1],_inf,c*(i!=1));
             for(auto&x:grx[i]){
-                cir(p,1,k+1) gr.insert(lnds[i-1],nds[x-1],1,d*p*p-d*(p-1)*(p-1)+c);
+                cir(p,1,k+1) gr.link(lnds[i-1],nds[x-1],1,d*p*p-d*(p-1)*(p-1)+c);
             }
         }
     }
-    gr.insert(nds[0],t,_inf,0);
-    cout<<gr.flow(s,t).first<<'\n';
+    gr.link(nds[0],t,_inf,0);
+    println("{}",gr.flow(s,t));
     return 0;
 }
