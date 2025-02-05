@@ -2,12 +2,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("c.in");
-ofstream fcout("c.out");
+ifstream inf("c.in");
+ofstream ouf("c.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 static constexpr auto _inf=(int)(1e9+7);
@@ -70,24 +70,24 @@ public:
 };
 int main(){
     ios::sync_with_stdio(false),cin.tie(nullptr);
-    int n,m;fcin>>n>>m;graph gr(n);
+    int n,m;inf>>n>>m;graph gr(n);
     cir(i,0,m){
-        int u,v;fcin>>u>>v;--u;--v;
+        int u,v;inf>>u>>v;--u;--v;
         gr.link(u,v);
     }
-    int k;fcin>>k;
+    int k;inf>>k;
     vector<vector<pair<int,int>>> ban(n);
     vector<int> id(n,-1);
     cir(i,0,k){
-        int l;fcin>>l;
+        int l;inf>>l;
         cir(c,0,l){
-            int u;fcin>>u;--u;id[u]=i;
+            int u;inf>>u;--u;id[u]=i;
             ban[u].emplace_back(c,l);
         }
     }
     gr.initban(ban,id);
     const auto ans=gr.check(0,n-1);
-    if(ans>_inf/2) fcout<<"impossible\n";
-    else fcout<<ans<<'\n';
+    if(ans>_inf/2) ouf<<"impossible\n";
+    else ouf<<ans<<'\n';
     return 0;
 }

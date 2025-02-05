@@ -1,19 +1,19 @@
 #include<bits/extc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("make.in");
-ofstream fcout("make.out");
+ifstream inf("make.in");
+ofstream ouf("make.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n;fcin>>n;vector<lint> a(n);
-    for(auto&i:a) fcin>>i;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n;inf>>n;vector<lint> a(n);
+    for(auto&i:a) inf>>i;
     auto pre=a;
     pre.insert(pre.begin(),0);
     cir(i,1,n+1) pre[i]+=pre[i-1];
@@ -32,6 +32,6 @@ int main(){
         cir(x,1,n+1) cir(y,x,n+1) ++cnt[pre[y]-pre[x-1]-pre[i-1]+ad];
         cir(x,1,n+1) cir(y,x,n+1) ans+=cnt[-(pre[y]-pre[x-1]+pre[i])+ad]; 
     }
-    fcout<<ans/6<<'\n';
+    ouf<<ans/6<<'\n';
     return 0;
 }

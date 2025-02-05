@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("doll.in");
-ofstream fcout("doll.out");
+ifstream inf("doll.in");
+ofstream ouf("doll.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 template<class comp>
@@ -31,9 +31,9 @@ public:
     sparsetable(auto x){init(x);}
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,q;fcin>>n>>q;vector<int> a(n);
-    for(auto&i:a) fcin>>i;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,q;inf>>n>>q;vector<int> a(n);
+    for(auto&i:a) inf>>i;
     vector<int> p(n);
     iota(p.begin(),p.end(),0);
     sparsetable<less<int>> stmn(a);
@@ -62,12 +62,12 @@ int main(){
         }
     }
     cir(i,0,q){
-        int l,r;fcin>>l>>r;--l;--r;
+        int l,r;inf>>l>>r;--l;--r;
         auto ans=0,u=r;
         for(auto c=ups-1;~c;--c) if(up[u][c]>l-1){
             ans+=(1<<c);u=up[u][c];
         }
-        fcout<<r-l-ans<<'\n';
+        ouf<<r-l-ans<<'\n';
     }
     return 0;
 }

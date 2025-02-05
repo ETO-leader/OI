@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("fire.in");
-ofstream fcout("fire.out");
+ifstream inf("fire.in");
+ofstream ouf("fire.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -33,11 +33,11 @@ public:
 
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,m;fcin>>n>>m;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,m;inf>>n>>m;
     vector<tuple<int,int,lint>> es;
     cir(i,0,m){
-        int u,v,p,q;fcin>>u>>v>>p>>q;--u;--v;
+        int u,v,p,q;inf>>u>>v>>p>>q;--u;--v;
         const auto px=p*math.inv(q)%MOD;
         es.emplace_back(u,v,(MOD+1-px));
     }
@@ -109,7 +109,7 @@ int main(){
         }
         ((++f[s])*=math.inv(sumvaild))%=MOD;
     }
-    cir(u,0,n) fcout<<f[1<<u]<<' ';
-    fcout<<'\n';
+    cir(u,0,n) ouf<<f[1<<u]<<' ';
+    ouf<<'\n';
     return 0;
 }

@@ -1,20 +1,20 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("game.in");
-ofstream fcout("game.out");
+ifstream inf("game.in");
+ofstream ouf("game.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 };
 using lint=long long;
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int T;fcin>>T;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int T;inf>>T;
     while(T--) [&]{
-        lint x,l,r,p,op;fcin>>x>>l>>r>>p>>op;
+        lint x,l,r,p,op;inf>>x>>l>>r>>p>>op;
         vector<array<vector<pair<int,int>>,2>> to(p);
         if(r-l+1>p-1) l=0,r=p-1;
         vector in(p,vector(2,r-l+1)),f(p,vector<lint>(2,-1));
@@ -40,7 +40,7 @@ int main(){
             }
         }
         cir(i,0,p) cir(op,0,2) clog<<i<<' '<<op<<": "<<f[i][op]<<'\n';
-        fcout<<(vis[x][op]?f[x][op]:-1)<<'\n';
+        ouf<<(vis[x][op]?f[x][op]:-1)<<'\n';
     }();
     return 0;
 }

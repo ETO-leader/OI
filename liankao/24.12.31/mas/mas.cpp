@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("mas.in");
-ofstream fcout("mas.out");
+ifstream inf("mas.in");
+ofstream ouf("mas.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using ulint=unsigned long long;
@@ -26,14 +26,14 @@ public:
     hashstr(string s){init(s);}
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n;fcin>>n;
-    string s;fcin>>s;
-    int q;fcin>>q;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n;inf>>n;
+    string s;inf>>s;
+    int q;inf>>q;
     const auto spc=count(s.begin(),s.end(),'a')==n;
     cir(i,0,q) [&]{
-        int l,r,k;fcin>>l>>r>>k;--l;--r;
-        if(spc) return fcout<<(ulint)(r-l+1)*k-1<<'\n',void();
+        int l,r,k;inf>>l>>r>>k;--l;--r;
+        if(spc) return ouf<<(ulint)(r-l+1)*k-1<<'\n',void();
         const auto sx=s.substr(l,r-l+1)+s.substr(l,r-l+1);
         hashstr hx(sx);
         unordered_set<ulint> cnt;
@@ -50,9 +50,9 @@ int main(){
                 if(!cnt.count(nhx.substr(p,p+len-1))) ncnt.emplace(nhx.substr(p,p+len-1));
             }
             // clog<<"NSIZ: "<<ncnt.size()<<'\n';
-            fcout<<cnt.size()+ncnt.size()*(k-2)<<'\n';
+            ouf<<cnt.size()+ncnt.size()*(k-2)<<'\n';
         }else{
-            fcout<<cnt.size()<<'\n';
+            ouf<<cnt.size()<<'\n';
         }
     }();
     return 0;

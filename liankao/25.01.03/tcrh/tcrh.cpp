@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("tcrh.in");
-ofstream fcout("tcrh.out");
+ifstream inf("tcrh.in");
+ofstream ouf("tcrh.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -53,11 +53,11 @@ public:
     dag(int _n):gr(_n),f(_n),in(_n),rgr(_n),vis(_n),vaild(_n){}
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,m,k;fcin>>n>>m>>k;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,m,k;inf>>n>>m>>k;
     dag gr(n);
     cir(i,0,m){
-        int u,v;fcin>>u>>v;--u;--v;
+        int u,v;inf>>u>>v;--u;--v;
         gr.link(u,v);
     }
     vector<lint> fct(m+7,1),ifct(m+7);
@@ -70,8 +70,8 @@ int main(){
     };
     const auto fx=gr.init();
     if(fx.empty()){
-        cir(i,0,k+1) fcout<<0<<' ';
-        fcout<<'\n';
+        cir(i,0,k+1) ouf<<0<<' ';
+        ouf<<'\n';
     }else{
         auto sum=0ll;
         for(auto&[l,w]:fx) (sum+=w)%=MOD;
@@ -79,9 +79,9 @@ int main(){
         cir(i,0,k+1){
             auto ans=0ll;
             for(auto&[l,w]:fx)  (ans+=C(m-l,i)*w%MOD*px%MOD*math.inv(C(m,i)))%=MOD;
-            fcout<<ans<<' ';
+            ouf<<ans<<' ';
         }
-        fcout<<'\n';
+        ouf<<'\n';
     }
     return 0;
 }

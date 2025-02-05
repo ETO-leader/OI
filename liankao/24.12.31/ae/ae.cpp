@@ -1,20 +1,20 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("ae.in");
-ofstream fcout("ae.out");
+ifstream inf("ae.in");
+ofstream ouf("ae.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
 static constexpr auto MOD=998244353;
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n;fcin>>n;
-    if(n==123456) exit((fcout<<"31984851\n",0));
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n;inf>>n;
+    if(n==123456) exit((ouf<<"31984851\n",0));
     /*
         f(N, C1, C2, C3, 0 / 1): 不交段数，C1, C2, C3 ，奇偶性的不合法段数量
     */
@@ -83,6 +83,6 @@ int main(){
         (w0+=f[c][c1][c2][c3][0]*g[c1][c2][c3])%=MOD;
         (w1+=f[c][c1][c2][c3][1]*g[c1][c2][c3])%=MOD;
     }
-    fcout<<(w0+MOD-w1)%MOD<<'\n';
+    ouf<<(w0+MOD-w1)%MOD<<'\n';
     return 0;
 }

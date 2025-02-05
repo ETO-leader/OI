@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("food.in");
-ofstream fcout("food.out");
+ifstream inf("food.in");
+ofstream ouf("food.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -40,7 +40,7 @@ public:
 class bruteforce{
 private:
     auto readarr(auto&x) const{
-        for(auto&i:x) fcin>>i;
+        for(auto&i:x) inf>>i;
     }
     auto readarr(auto&x,auto&...args) const{
         readarr(x);readarr(args...);
@@ -95,15 +95,15 @@ public:
                 }
             }
         }
-        fcout<<ans<<'\n';
-        if(ans==suma) fcout<<1<<' '<<n<<'\n'<<0<<' '<<0<<'\n';
-        else if(ans==sumb) fcout<<0<<' '<<0<<'\n'<<1<<' '<<m<<'\n';
-        else fcout<<alx+1<<' '<<arx+1<<'\n'<<plx+1<<' '<<prx+1<<'\n';
+        ouf<<ans<<'\n';
+        if(ans==suma) ouf<<1<<' '<<n<<'\n'<<0<<' '<<0<<'\n';
+        else if(ans==sumb) ouf<<0<<' '<<0<<'\n'<<1<<' '<<m<<'\n';
+        else ouf<<alx+1<<' '<<arx+1<<'\n'<<plx+1<<' '<<prx+1<<'\n';
     }
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,m;fcin>>n>>m;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,m;inf>>n>>m;
     if(n<10007&&m<10007) bruteforce(n,m);
     return 0;
 }

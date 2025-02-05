@@ -2,16 +2,16 @@
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
 #if not defined(__DEBUG__)
-ifstream fcin("decoding.in");
-ofstream fcout("decoding.out");
+ifstream inf("decoding.in");
+ofstream ouf("decoding.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
-#define cin fcin
-#define cout fcout
+#define cin inf
+#define cout ouf
 #endif
 using lf=long double;
 int main(){

@@ -2,10 +2,10 @@
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
 #if defined(ONLINE_JUDGE)
-ifstream fcin("clock.in");
-ofstream fcout("clock.out");
-#define cin fcin
-#define cout fcout
+ifstream inf("clock.in");
+ofstream ouf("clock.out");
+#define cin inf
+#define cout ouf
 #endif
 using lint=long long;
 using lf=long double;

@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("draughts.in");
-ofstream fcout("draughts.out");
+ifstream inf("draughts.in");
+ofstream ouf("draughts.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 };
 using lint=long long;
@@ -82,17 +82,17 @@ public:
     ~treap(){if(root) delete root;}
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,q;lint l;fcin>>n>>q>>l;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,q;lint l;inf>>n>>q>>l;
     auto mn=numeric_limits<lint>::max(),mx=numeric_limits<lint>::min();
     treap tr;
     cir(i,0,n){
-        lint w;fcin>>w;tr.emplace(w*2);
+        lint w;inf>>w;tr.emplace(w*2);
         mn=min(mn,w);mx=max(mx,w);
     }
     auto arcnt=n;
     cir(i,0,q){
-        int op;lint w;fcin>>op>>w;
+        int op;lint w;inf>>op>>w;
         if(op==1){
             tr.emplace(w*2);
             mn=min(mn,w);mx=max(mx,w);
@@ -102,8 +102,8 @@ int main(){
             const auto valx=tr.value()*(arcnt&1?-1:1);
             const auto valrx=valx+w*(arcnt&1?-1:1);
             const auto valnx=(mx*2-valx)+w*(arcnt&1?1:-1);
-            if(valnx>l) fcout<<min(mx*2-l,l)<<'\n';
-            else fcout<<min(valrx,l)<<'\n';
+            if(valnx>l) ouf<<min(mx*2-l,l)<<'\n';
+            else ouf<<min(valrx,l)<<'\n';
         }
     }
     return 0;

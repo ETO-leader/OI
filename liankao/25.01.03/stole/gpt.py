@@ -5,23 +5,23 @@ class FileIO:
     def __init__(self, input_file, output_file):
         self.input_file = input_file
         self.output_file = output_file
-        self.fcin = open(input_file, "r")
-        self.fcout = open(output_file, "w")
+        self.inf = open(input_file, "r")
+        self.ouf = open(output_file, "w")
 
     def read(self):
-        return self.fcin.read()
+        return self.inf.read()
 
     def write(self, data):
-        self.fcout.write(data)
+        self.ouf.write(data)
 
     def close(self):
-        self.fcin.close()
-        self.fcout.close()
+        self.inf.close()
+        self.ouf.close()
 
 # Handle input/output using FileIO
 file_io = FileIO("stole.in", "stole.out")
-sys.stdin = file_io.fcin
-sys.stdout = file_io.fcout
+sys.stdin = file_io.inf
+sys.stdout = file_io.ouf
 
 class MathBase:
     def __init__(self, p):

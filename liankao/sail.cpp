@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("sail.in");
-ofstream fcout("sail.out");
+ifstream inf("sail.in");
+ofstream ouf("sail.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -44,9 +44,9 @@ auto gauss(vector<vector<lint>> a){
     return ans;
 }
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n;fcin>>n;vector<lint> p(n);
-    for(auto&i:p) fcin>>i,(i*=math.inv(100))%=MOD;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n;inf>>n;vector<lint> p(n);
+    for(auto&i:p) inf>>i,(i*=math.inv(100))%=MOD;
     const auto sec=(int)(sqrtl(n)*1.5);
     vector f(n,vector(n+1,vector<lint>(sec*2+7)));
     cir(i,0,n) f[i][i][sec]=1;
@@ -78,8 +78,8 @@ int main(){
     };
     cir(i,0,n){
         for(auto&i:vis) i.clear();
-        fcout<<(chkvaild(chkvaild,i,0)?ans[i]:-1)<<' ';
+        ouf<<(chkvaild(chkvaild,i,0)?ans[i]:-1)<<' ';
     }
-    fcout<<'\n';
+    ouf<<'\n';
     return 0;
 }

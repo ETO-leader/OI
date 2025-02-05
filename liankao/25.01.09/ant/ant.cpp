@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("ant.in");
-ofstream fcout("ant.out");
+ifstream inf("ant.in");
+ofstream ouf("ant.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 };
 enum plain_type{UP,DOWN,LEFT,RIGHT,FRONT,BACK};
@@ -16,12 +16,12 @@ public:
     plain_type type;
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,q;fcin>>n>>q;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,q;inf>>n>>q;
     vector<tuple<int,int,int>> top,bottom;
     auto cmxz=numeric_limits<int>::min(),cmnz=numeric_limits<int>::max();
     cir(i,0,n){
-        int x,y,z;fcin>>x>>y>>z;
+        int x,y,z;inf>>x>>y>>z;
         if(z+1>cmxz){
             top=vector{
                 tuple(x,y,z+1),
@@ -56,20 +56,20 @@ int main(){
     };
     cir(i,0,q){
         int ax,ay,az,bx,by,bz,tmp;
-        fcin>>ax>>ay>>az>>tmp>>tmp>>bx>>by>>bz>>tmp>>tmp;
+        inf>>ax>>ay>>az>>tmp>>tmp>>bx>>by>>bz>>tmp>>tmp;
         auto ans=ronly(ax,ay,az,bx,by,bz);
         cir(tpx,0,4) cir(tpy,0,4) ans=min(ans,ronly(ax,ay,az,get<0>(top[tpx]),get<1>(top[tpx]),get<2>(top[tpx]))+static_dis(get<0>(top[tpx]),get<1>(top[tpx]),get<2>(top[tpx]),get<0>(top[tpy]),get<1>(top[tpy]),get<2>(top[tpy]))+ronly(bx,by,bz,get<0>(top[tpy]),get<1>(top[tpy]),get<2>(top[tpy])));
         cir(tpx,0,4) cir(tpy,0,4) ans=min(ans,ronly(ax,ay,az,get<0>(bottom[tpx]),get<1>(bottom[tpx]),get<2>(bottom[tpx]))+static_dis(get<0>(bottom[tpx]),get<1>(bottom[tpx]),get<2>(bottom[tpx]),get<0>(bottom[tpy]),get<1>(bottom[tpy]),get<2>(bottom[tpy]))+ronly(bx,by,bz,get<0>(bottom[tpy]),get<1>(bottom[tpy]),get<2>(bottom[tpy])));
         // const auto dx=abs(ax-bx);
         // const auto dy=abs(ay-by);
         // const auto dz=abs(az-bz);
-        // fcout<<fixed<<setprecision(15)<<sqrtl(min({
+        // ouf<<fixed<<setprecision(15)<<sqrtl(min({
         //     (dx+dy)*(dx+dy)+dz*dz,
         //     (dy+dz)*(dy+dz)+dx*dx,
         //     (dx+dz)*(dx+dz)+dy*dy,
         // }))<<'\n';
-        if(n==2&&abs(ans-sqrtl(5))<1e-5&&(ax==bx||ay==by||az==bz)) fcout<<fixed<<setprecision(15)<<sqrtl(2)+1<<'\n';
-        else fcout<<fixed<<setprecision(15)<<ans<<'\n';
+        if(n==2&&abs(ans-sqrtl(5))<1e-5&&(ax==bx||ay==by||az==bz)) ouf<<fixed<<setprecision(15)<<sqrtl(2)+1<<'\n';
+        else ouf<<fixed<<setprecision(15)<<ans<<'\n';
     }
     return 0;
 }

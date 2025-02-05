@@ -1,12 +1,12 @@
 #include<bits/extc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("puzzle.in");
-ofstream fcout("puzzle.out");
+ifstream inf("puzzle.in");
+ofstream ouf("puzzle.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 class invaild{
@@ -59,24 +59,24 @@ public:
     graph(int _n):gr(_n),in(_n),rgr(_n),rin(_n),vis(_n){}
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int T;fcin>>T;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int T;inf>>T;
     while(T--) []{
-        int n,m;fcin>>n>>m;vector<int> a(n);
-        for(auto&i:a) fcin>>i;
+        int n,m;inf>>n>>m;vector<int> a(n);
+        for(auto&i:a) inf>>i;
         vector<int> initr(n,n+1);
         cir(i,0,n) if(a[i]) initr[i]=a[i];
         graph gr(n);
         cir(i,0,m){
-            int u,v;fcin>>u>>v;--u;--v;
+            int u,v;inf>>u>>v;--u;--v;
             gr.link(u,v);
         }
         try{
             const auto ans=gr.check(initr,a);
-            copy(ans.begin(),ans.end(),ostream_iterator<int>(fcout," "));
-            fcout<<'\n';
+            copy(ans.begin(),ans.end(),ostream_iterator<int>(ouf," "));
+            ouf<<'\n';
         }catch(invaild info){
-            fcout<<info.what()<<'\n';
+            ouf<<info.what()<<'\n';
         }
     }();
     return 0;

@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("inverse.in");
-ofstream fcout("inverse.out");
+ifstream inf("inverse.in");
+ofstream ouf("inverse.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 class segment{
@@ -37,9 +37,9 @@ public:
     segment(int _n):n(_n),a(_n<<2,node()){}
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n;fcin>>n;vector<int> a(n);
-    for(auto&i:a) fcin>>i;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n;inf>>n;vector<int> a(n);
+    for(auto&i:a) inf>>i;
     vector<int> lfp,lfw,rgp,rgw;
     set<int> invaild;
     cir(i,0,n){
@@ -67,6 +67,6 @@ int main(){
         for(auto&[l,r,w]:ops[i]) sg.update(l,r,w);
         ans=max(ans,sg.max());
     }
-    fcout<<ans*2+1<<'\n';
+    ouf<<ans*2+1<<'\n';
     return 0;
 }

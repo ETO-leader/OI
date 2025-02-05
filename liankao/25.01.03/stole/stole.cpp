@@ -2,12 +2,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("stole.in");
-ofstream fcout("stole.out");
+ifstream inf("stole.in");
+ofstream ouf("stole.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=unsigned long long;
@@ -40,8 +40,8 @@ public:
     }
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,r;uint p;fcin>>n>>r>>p;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,r;uint p;inf>>n>>r>>p;
     mathbase math(p);
     vector c(n+7,vector<lint>(n+7));
     c[0][0]=1;
@@ -66,6 +66,6 @@ int main(){
     vector<lint> fx(m),pos(m);
     iota(pos.begin(),pos.end(),1);
     cir(i,0,m) fx[i]=f[n][i+1];
-    fcout<<lagrange().solve(fx,pos,r,p)<<'\n';
+    ouf<<lagrange().solve(fx,pos,r,p)<<'\n';
     return 0;
 }

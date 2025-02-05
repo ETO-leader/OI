@@ -2,12 +2,12 @@
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
 
-ifstream fcin("celeste.in");
-ofstream fcout("celeste.out");
+ifstream inf("celeste.in");
+ofstream ouf("celeste.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 
@@ -343,20 +343,20 @@ gameCore::gameCore(point_t u):user(u){}
 
 int main(){
     ios::sync_with_stdio(false),cin.tie(nullptr);
-    int m;fcin>>m;vector<pair<point_t,point_t>> px(m);
+    int m;inf>>m;vector<pair<point_t,point_t>> px(m);
     for(auto&[lu,rd]:px){
-        pos_t xl,yl,xr,yr;fcin>>xl>>yl>>xr>>yr;
+        pos_t xl,yl,xr,yr;inf>>xl>>yl>>xr>>yr;
         lu=point_t(xl,yl);rd=point_t(xr,yr);
     }
-    pos_t ux,uy;fcin>>ux>>uy;
+    pos_t ux,uy;inf>>ux>>uy;
     gameCore game(point_t(ux,uy));
     for(auto&[lu,rd]:px) game.insertWall(wall(lu,rd));
-    int q;fcin>>q;
-    fcout<<fixed<<setprecision(15);
+    int q;inf>>q;
+    ouf<<fixed<<setprecision(15);
     cir(i,0,q){
-        string s;fcin>>s;
+        string s;inf>>s;
         const auto pos=game.operation(s);
-        fcout<<gx(pos)<<' '<<gy(pos)<<'\n';
+        ouf<<gx(pos)<<' '<<gy(pos)<<'\n';
     }
     return 0;
 }

@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("tree.in");
-ofstream fcout("tree.out");
+ifstream inf("tree.in");
+ofstream ouf("tree.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 class dsu{
@@ -65,18 +65,18 @@ public:
     tree(int _n):gr(_n),col(_n),fr(_n){}
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,m;fcin>>n>>m;tree tr(n);
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,m;inf>>n>>m;tree tr(n);
     dsu ds(n);
     auto rt=0,vx=-1;
     cir(i,0,m){
-        int u,v;fcin>>u>>v;--u;--v;
+        int u,v;inf>>u>>v;--u;--v;
         if(ds.findset(u)==ds.findset(v)){
             rt=u;vx=v;continue;
         }
         ds.merge(u,v);
         tr.link(u,v);
     }
-    fcout<<tr.checkcir(rt,vx)<<'\n';
+    ouf<<tr.checkcir(rt,vx)<<'\n';
     return 0;
 }

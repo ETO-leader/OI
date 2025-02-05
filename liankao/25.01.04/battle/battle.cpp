@@ -2,12 +2,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-// ifstream fcin("battle.in");
-// ofstream fcout("battle.out");
+// ifstream inf("battle.in");
+// ofstream ouf("battle.out");
 // class fileio{
 // public:
 //     ~fileio(){
-//         fcin.close();fcout.close();
+//         inf.close();ouf.close();
 //     }
 // } use_fileio;
 auto FILEIN=fopen("battle.in","r");
@@ -142,7 +142,7 @@ public:
     bit(int _n):ax(_n+1){}
 };
 int main(){
-    // ios::sync_with_stdio(false),fcin.tie(nullptr);
+    // ios::sync_with_stdio(false),inf.tie(nullptr);
     int n;IOf.read(n);vector<int> k(n);
     for(auto&i:k) IOf.read(i);
     const auto maxk=*max_element(k.begin(),k.end());
@@ -207,7 +207,7 @@ int main(){
             ans=min(ans,rtcnt-(cnt-(n-cnt))*dep);
         }
     }();
-    // fcout<<ans<<'\n';
+    // ouf<<ans<<'\n';
     IOf.writeln(ans);
     return 0;
 }

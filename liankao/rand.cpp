@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("rand.in");
-ofstream fcout("rand.out");
+ifstream inf("rand.in");
+ofstream ouf("rand.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -56,13 +56,13 @@ auto operator/(poly a,poly b){
     return ans;
 }
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,m;fcin>>n>>m;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,m;inf>>n>>m;
     const auto invprob=math.inv(m);
     vector<lint> cur(n,1);
     map<int,vector<int>> pw;
     cir(i,0,n) cir(j,0,m){
-        int x;fcin>>x;pw[x].push_back(i);
+        int x;inf>>x;pw[x].push_back(i);
     }
     auto curp=poly{1};
     cir(i,0,n) curp=curp*poly{1,0};
@@ -81,6 +81,6 @@ int main(){
     cir(i,1,(int)(ans.size())) (ans[i-1].first+=MOD-ans[i].first)%=MOD;
     auto answ=0ll;
     for(auto&[p,w]:ans) (answ+=p*w)%=MOD;
-    fcout<<answ<<'\n';
+    ouf<<answ<<'\n';
     return 0;
 }

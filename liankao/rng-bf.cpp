@@ -3,12 +3,12 @@
 #include<bits/extc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("rng.in");
-ofstream fcout("rng.out");
+ifstream inf("rng.in");
+ofstream ouf("rng.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using ulint=unsigned long long;
@@ -114,12 +114,12 @@ public:
     polybase(){init();}
 } poly;
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,k;fcin>>n>>k;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,k;inf>>n>>k;
     if(n==2){
         auto ans=0ull;
         cir(ax,0,k+1) (ans+=math.C(k,ax)*max(ax,k-ax))%=MOD;
-        fcout<<ans<<'\n';
+        ouf<<ans<<'\n';
         exit(0);
     }
     vector<ulint> a;
@@ -143,6 +143,6 @@ int main(){
         las=bx[k]*math.fact(k)%MOD;
         (ans+=(las+MOD-lasx)*i)%=MOD;
     }
-    fcout<<ans<<'\n';
+    ouf<<ans<<'\n';
     return 0;
 }

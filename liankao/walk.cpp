@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("walk.in");
-ofstream fcout("walk.out");
+ifstream inf("walk.in");
+ofstream ouf("walk.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -53,16 +53,16 @@ public:
     tree(int _n):gr(_n),vis(_n){}
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,q;fcin>>n>>q;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,q;inf>>n>>q;
     vector<lint> v(n);
-    for(auto&i:v) fcin>>i;
+    for(auto&i:v) inf>>i;
     vector<pair<int,int>> es(n-1);
-    for(auto&[u,v]:es) fcin>>u>>v,--u,--v;
+    for(auto&[u,v]:es) inf>>u>>v,--u,--v;
     for(auto&[u,v]:es) if(u>v) swap(u,v);
     auto ans=0ll;
     cir(i,0,q) [&]{
-        int a,b,c,d;fcin>>a>>b>>c>>d;--a;--b;--c;--d;
+        int a,b,c,d;inf>>a>>b>>c>>d;--a;--b;--c;--d;
         tree tr(n);
         tr.link(c,d);
         if(a>b) swap(a,b);
@@ -72,6 +72,6 @@ int main(){
             ans^=tr.check()*2;
         }catch(invaildcase){}
     }();
-    fcout<<ans<<'\n';
+    ouf<<ans<<'\n';
     return 0;
 }

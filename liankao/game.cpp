@@ -2,12 +2,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-// ifstream fcin("game.in");
-ofstream fcout("game.out");
+// ifstream inf("game.in");
+ofstream ouf("game.out");
 class fileio{
 public:
     ~fileio(){
-        /*fcin.close();*/fcout.close();
+        /*inf.close();*/ouf.close();
     }
 } use_fileio;
 namespace flash_man{
@@ -40,7 +40,7 @@ public:
         __FILEI=fopen(file,"r");
     }
 };
-qistream fcin("game.in");
+qistream inf("game.in");
 static constexpr auto maxmem=(int)(1.5e7+7);
 template<const size_t allocmem>
 class stalin_tree{
@@ -94,9 +94,9 @@ public:
     }
 };
 int main(){
-    ios::sync_with_stdio(false);//,fcin.tie(nullptr);
-    int n,q;fcin>>n>>q;vector<int> a(n);
-    for(auto&i:a) fcin>>i;
+    ios::sync_with_stdio(false);//,inf.tie(nullptr);
+    int n,q;inf>>n>>q;vector<int> a(n);
+    for(auto&i:a) inf>>i;
     stalin_tree<maxmem> tr(n+7);
     for(auto&i:a) tr.append(i);
     auto mkminmax=[](auto a,auto b){
@@ -104,7 +104,7 @@ int main(){
         return pair(b,a);
     };
     cir(i,0,q) [&](){
-        int pl,pr;fcin>>pl>>pr;--pl;--pr;
+        int pl,pr;inf>>pl>>pr;--pl;--pr;
         auto l=pl,r=pr;
         while(r-l>3){
             const auto lmid=(l+r)/2,rmid=lmid+1;
@@ -121,7 +121,7 @@ int main(){
         }
         auto ans=numeric_limits<int>::max();
         cir(i,l,r+1) ans=min(ans,max(tr.mex(pl,i),tr.mex(i+1,pr)));
-        fcout<<ans<<'\n';
+        ouf<<ans<<'\n';
     }();
     return 0;
 }

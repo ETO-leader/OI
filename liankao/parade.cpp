@@ -1,18 +1,18 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("parade.in");
-ofstream fcout("parade.out");
+ifstream inf("parade.in");
+ofstream ouf("parade.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,m;fcin>>n>>m;vector a(n,vector<int>(m));
-    for(auto&x:a) for(auto&i:x) fcin>>i;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,m;inf>>n>>m;vector a(n,vector<int>(m));
+    for(auto&x:a) for(auto&i:x) inf>>i;
     auto check=[&](){
         vector cx(n,vector<int>(n)),cy(n,vector<int>(n));
         for(auto i=n-1;~i;--i) for(auto j=m-1;~j;--j){
@@ -39,6 +39,6 @@ int main(){
     auto ans=check();
     for(auto&x:a) reverse(x.begin(),x.end());
     ans=max(ans,check());
-    fcout<<ans<<'\n';
+    ouf<<ans<<'\n';
     return 0;
 }

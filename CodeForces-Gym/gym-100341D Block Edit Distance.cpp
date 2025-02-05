@@ -2,16 +2,16 @@
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
 #if not defined(__DEBUG__)
-ifstream fcin("block.in");
-ofstream fcout("block.out");
+ifstream inf("block.in");
+ofstream ouf("block.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
-#define cin fcin
-#define cout fcout
+#define cin inf
+#define cout ouf
 #endif
 static constexpr int _inf=1e9+7;
 int main(){

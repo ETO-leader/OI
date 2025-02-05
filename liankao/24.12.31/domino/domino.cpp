@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("domino.in");
-ofstream fcout("domino.out");
+ifstream inf("domino.in");
+ofstream ouf("domino.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -45,8 +45,8 @@ public:
     matrix(auto _n):a(_n,vector<lint>(_n)){}
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,m;fcin>>n>>m;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,m;inf>>n>>m;
     vector g(1<<n,vector<lint>(1<<n));
     cir(i,0,(1<<n)) cir(s,0,(1<<n)){
         g[i][s]=[&]{
@@ -85,6 +85,6 @@ int main(){
     const auto result=(sf*h.pow(m))[0];
     auto ans=0ll;
     for(auto&[i,id]:isvaild) if(i&1) (ans+=result[id])%=MOD;
-    fcout<<ans<<'\n';
+    ouf<<ans<<'\n';
     return 0;
 }

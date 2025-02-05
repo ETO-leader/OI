@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("math.in");
-ofstream fcout("math.out");
+ifstream inf("math.in");
+ofstream ouf("math.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=unsigned long long;
@@ -31,8 +31,8 @@ auto primes(const auto m){
     return pr;
 }
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int T;lint m,p;fcin>>T>>m>>p;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int T;lint m,p;inf>>T>>m>>p;
     const auto pr=primes(m);
     vector<int> smp;
     const auto sqr=(int)(ceil(sqrtl(m)));
@@ -70,7 +70,7 @@ int main(){
     vector<lint> pw(kx+7);
     cir(i,0,kx+1) pw[i]=math.qpow(m,i,p);
     cir(i,0,T){
-        lint n;fcin>>n;
+        lint n;inf>>n;
         const auto q=min<lint>(n,kx-1);
         const auto prodx=math.qpow(m,n-q,p);
         auto cur=1ull,ans=0ull;
@@ -78,7 +78,7 @@ int main(){
             (ans+=cur*g[x]%p*pw[q-x]%p*prodx)%=p;
             (cur*=(n%p-x))%=p;
         }
-        fcout<<ans<<'\n';
+        ouf<<ans<<'\n';
     }
     return 0;
 }

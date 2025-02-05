@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("battle.in");
-ofstream fcout("battle.ans");
+ifstream inf("battle.in");
+ofstream ouf("battle.ans");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -25,9 +25,9 @@ public:
     }
 } math;
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n;fcin>>n;vector<int> k(n);
-    for(auto&i:k) fcin>>i;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n;inf>>n;vector<int> k(n);
+    for(auto&i:k) inf>>i;
     const auto maxk=*max_element(k.begin(),k.end());
     const auto cpf=math.initfp(maxk);
     unordered_map<int,int> pw2;
@@ -51,6 +51,6 @@ int main(){
         }
     }
     cir(i,2,maxk+1) ans=min(ans,rtcnt-sumfpf[i]+fw[i]*(n-subcnt[i])+subsum[i]);
-    fcout<<ans<<'\n';
+    ouf<<ans<<'\n';
     return 0;
 }

@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("a.in");
-ofstream fcout("a.out");
+ifstream inf("a.in");
+ofstream ouf("a.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -25,11 +25,11 @@ public:
 } math;
 int main(){
     ios::sync_with_stdio(false),cin.tie(nullptr);
-    int n,m;fcin>>n>>m;
+    int n,m;inf>>n>>m;
     vector<lint> a(n+1);
-    for(auto&i:a) fcin>>i;
+    for(auto&i:a) inf>>i;
     vector<lint> b(m+1);
-    cir(i,1,m+1) fcin>>b[i];
+    cir(i,1,m+1) inf>>b[i];
     vector f(m+1,vector<lint>(n+1));
     cir(i,0,n+1) f[0][i]=((i?f[0][i-1]:0)+a[i])%MOD;
     cir(i,1,m+1) cir(w,i,n+1){
@@ -43,7 +43,7 @@ int main(){
     }
     const auto ansp=accumulate(a.begin(),a.end(),0ll)%MOD;
     const auto prod=[&]{auto res=1ll;cir(i,1,m+1) (res*=b[i])%=(MOD-1);return res;}();
-    cir(i,0,n+1) fcout<<a[i]*[&]{
+    cir(i,0,n+1) ouf<<a[i]*[&]{
         auto res=0ll;
         cir(w,i,n+1) (res+=g[0][w])%=MOD;
         return res;

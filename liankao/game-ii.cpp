@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("game.in");
-ofstream fcout("game.out");
+ifstream inf("game.in");
+ofstream ouf("game.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 class dsu{
@@ -22,12 +22,12 @@ public:
     dsu(int _n):a(_n){iota(a.begin(),a.end(),0);}
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n,m,q;fcin>>n>>m>>q;vector<int> a(n);
-    for(auto&i:a) fcin>>i,--i;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n,m,q;inf>>n>>m>>q;vector<int> a(n);
+    for(auto&i:a) inf>>i,--i;
     vector<int> nxt(q),cur(n,-1),qx(q);
     cir(i,0,q){
-        int x,c;fcin>>x>>c;--x;--c;
+        int x,c;inf>>x>>c;--x;--c;
         qx[i]=c;
         nxt[i]=cur[x];
         cur[x]=i;
@@ -58,7 +58,7 @@ int main(){
         // for(auto&[w,id]:qx[i]) ans[id]=csg[sid[ds.findset(las[w])]];
     }
     cir(i,1,q) ans[i]^=ans[i-1];
-    for(auto&i:ans) fcout<<(bool)(i);
-    fcout<<'\n';
+    for(auto&i:ans) ouf<<(bool)(i);
+    ouf<<'\n';
     return 0;
 }

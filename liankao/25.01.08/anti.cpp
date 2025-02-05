@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("anti.in");
-ofstream fcout("anti.out");
+ifstream inf("anti.in");
+ofstream ouf("anti.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -24,11 +24,11 @@ public:
     constexpr auto inv(auto x){return qpow(x,MOD-2);}
 } math;
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int T;fcin>>T;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int T;inf>>T;
     while(T--) [](){
-        int n;fcin>>n;
-        string s;fcin>>s;
+        int n;inf>>n;
+        string s;inf>>s;
         unordered_set<string> vis;
         auto dfs=[&](auto __self,string cur)->lint {
             if(vis.count(cur)) return 0ll;
@@ -42,7 +42,7 @@ int main(){
             }
             return res;
         };
-        fcout<<dfs(dfs,s)<<'\n';
+        ouf<<dfs(dfs,s)<<'\n';
     }();
     return 0;
 }

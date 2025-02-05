@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("a.in");
-ofstream fcout("a.out");
+ifstream inf("a.in");
+ofstream ouf("a.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -32,9 +32,9 @@ public:
     }
 };
 int main(){
-    ios::sync_with_stdio(false),fcin.tie(nullptr);
-    int n;fcin>>n;vector<vector<lint>> a(n,vector<lint>(n));
-    for(auto&x:a) for(auto&i:x) fcin>>i;
+    ios::sync_with_stdio(false),inf.tie(nullptr);
+    int n;inf>>n;vector<vector<lint>> a(n,vector<lint>(n));
+    for(auto&x:a) for(auto&i:x) inf>>i;
     floyd grx(n,&a);
     cir(i,0,n) grx.append(i);
     auto ans=0ll;
@@ -51,6 +51,6 @@ int main(){
         cir(i,mid+1,r+1) grl.append(i);
         return __self(__self,l,mid,grl)+__self(__self,mid+1,r,grr);
     };
-    fcout<<ans+divide(divide,0,n-1,floyd(n,&a))<<'\n';
+    ouf<<ans+divide(divide,0,n-1,floyd(n,&a))<<'\n';
     return 0;
 }

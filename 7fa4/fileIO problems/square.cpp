@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
-ifstream fcin("square.in");
-ofstream fcout("square.out");
+ifstream inf("square.in");
+ofstream ouf("square.out");
 class fileio{
 public:
     ~fileio(){
-        fcin.close();fcout.close();
+        inf.close();ouf.close();
     }
 } use_fileio;
 using lint=long long;
@@ -26,7 +26,7 @@ public:
 } math;
 int main(){
     ios::sync_with_stdio(false),cin.tie(nullptr);
-    int T;fcin>>T;
+    int T;inf>>T;
     vector<int> mu(maxn);
     vector<lint> p;
     bitset<maxn> isnp;
@@ -47,8 +47,8 @@ int main(){
     }
     cir(i,1,maxn) (pprod[i]*=pprod[i-1])%=MOD;
     while(T--) [&](){
-        int n;fcin>>n;
-        fcout<<math.qpow(fct[n],n*2)%MOD*math.inv(pprod[n]*pprod[n]%MOD)%MOD<<'\n';
+        int n;inf>>n;
+        ouf<<math.qpow(fct[n],n*2)%MOD*math.inv(pprod[n]*pprod[n]%MOD)%MOD<<'\n';
     }();
     return 0;
 }
