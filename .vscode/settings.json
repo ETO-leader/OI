@@ -124,7 +124,8 @@
         "stdfloat": "cpp",
         "generator": "cpp",
         "text_encoding": "cpp",
-        "inf": "cpp"
+        "inf": "cpp",
+        "dynamic_bitset": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled",
     "problems.showCurrentInStatus": false,
