@@ -83,7 +83,12 @@
 * 给定 $k$ 使得将 $x$ 和 $y$ 合并为 $\frac{(x+y)}{f(x+y)}$ $f(x)=k^x, k=\max\{i \in \mathbb{N} | (k^i | x)\} \Longleftrightarrow$ $\exists b=\mathbb{N}^n, \sum a_ik^{-b_i}=1$
 #### 7fa4Q4.1.2.1
 * 约数和为 $S$ 的数大小是 $O(S)$ 的
+#### AtCarc136E
+* $x|y \Longleftrightarrow x \rightarrow y$ 的 DAG 可达性讨论 $\text{minP}$
 ## Math
+#### AtCagc019F
+* 贪心最优化答案的答案和计数题考虑转化题意把价值分摊到每一步
+* 组合意义，对于对角线有明显意义的方格图计数考虑对折后分开计算
 ## Polys
 #### CF933D
 * 不幸遇到很难的式子题，不过答案可以证是多项式可以考虑暴力求解几项然后 Lagrange 插值
@@ -164,6 +169,10 @@
 * 对于一类小球往 左/右 滚动并改变格子符号的问题，注意观察性质和找不变量
 #### UOJ951
 * 关心 $a_i+a_j \le w$ 的数对数量的计数，分讨 $a_i \le \lfloor \frac w 2 \rfloor$ 和 $a > \lfloor \frac w 2 \rfloor$ 
+#### CF1761G1/G2/G3
+* 询问 $\left|\left\{\lfloor\frac{p_i}{2} | i \in [l,r] \cap \mathbb{Z} \rfloor\right\}\right|, \text{p is a permutation}$ 等价于询问区间 $[l,r]$ 中的除以二下取整相同的匹配数 
+#### LuoguP3713
+* 方案数平方等价于两个人选同一个方案的选法
 ## Randomize
 #### CF1578M
 * 保证数据随机且只需要给出正确率较高的方案，本地随机生成数据优化参数 (ML ???)

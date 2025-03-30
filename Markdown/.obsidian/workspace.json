@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "9be79ef31002397e",
+        "id": "efb9f807380d8f1f",
         "type": "tabs",
         "children": [
           {
-            "id": "0ffb053dc96220c5",
+            "id": "05443bf497fa3705",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -19,18 +19,6 @@
               },
               "icon": "lucide-file",
               "title": "Record"
-            }
-          },
-          {
-            "id": "a5baa9d2ac6d5be4",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.8.9"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.8.9"
             }
           }
         ]
@@ -178,12 +166,13 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "0ffb053dc96220c5",
+  "active": "05443bf497fa3705",
   "lastOpenFiles": [
-    "你 tmd 都到底是怎么挂的.md",
-    "Record.md",
-    "SXLK 2024.md",
     "Guessing Game Solution.md",
+    "未命名.md",
+    "Record.md",
+    "你 tmd 都到底是怎么挂的.md",
+    "SXLK 2024.md",
     "[P6062.md",
     "stole.md",
     "8673.md",
@@ -205,7 +194,6 @@
     "1801G.md",
     "cf914F.md",
     "影响位置数上限.md",
-    "Plan.md",
     "7fa4",
     "Temp",
     "Solutions/Universal Online Judge",
