@@ -38,6 +38,10 @@
 * 当部分情况的信息可以快速处理，另外一部分信息有关序列长度时可以分块求解
 #### CF2079B
 * DP 多起点单终点改贪心+DS 优化
+#### LuoguP7155
+* 从高位到低位划分过程然后 DP
+#### LibreOJ2731 / CF1060F
+* 对于一类依靠相邻信息的计算操作顺序数量计数 DP，状态设计可以为 $f(u,i,\dots)$ 表示在 $u$ 对应的子状态里，$u$ 在第 $i$ 次操作后 ...
 ## Interactive / Communication
 
 #### QOJ6661
@@ -64,6 +68,8 @@
 * 棋盘上抓棋子，考虑按行扫并且考虑被抓的人的某个方向的移动次数上限
 #### AtCddcc2020_qual_e
 * 零点存在性定理可以二分
+#### CF1761G1/G2/G3
+* 询问 $\left|\left\{\lfloor\frac{p_i}{2} | i \in [l,r] \cap \mathbb{Z} \rfloor\right\}\right|, \text{p is a permutation}$ 等价于询问区间 $[l,r]$ 中的除以二下取整相同的匹配数 
 ## Strings
 
 #### CF1483F
@@ -89,11 +95,25 @@
 #### AtCagc019F
 * 贪心最优化答案的答案和计数题考虑转化题意把价值分摊到每一步
 * 组合意义，对于对角线有明显意义的方格图计数考虑对折后分开计算
-## Polys
+### Problems
+* 枚举数的 $k$ 次方考虑转第二类斯特林数
+#### AtCagc058D
+* 容斥可以只容斥起点
+## Polys and GFs
 #### CF933D
 * 不幸遇到很难的式子题，不过答案可以证是多项式可以考虑暴力求解几项然后 Lagrange 插值
+#### CF891E
+- $$
+ \sum\limits_{i\ge 0} (a_i-i)\frac{x^i}{i!}=\sum\limits_{i \ge 0} a_i\frac{x^i}{i!}-x\sum\limits_{i \ge 0} \frac{x^i}{i!}=a_ie^x-xe^x
+ $$
 ## Combination
-
+#### LuoguP5405
+* 对于边定向的容斥：若边的朝向固定可以求解 (正边)，则可以将反边看作不存在 / 正边，然后容斥 
+#### LuoguP8114
+* 三角形匹配 $\longrightarrow$ 三维堆叠
+* 每一维均有单调性的三位堆叠的方案数可以用 LGV 求解每一条划分高度的线的连法
+#### AtCagc060D / LuoguP8329
+* 容斥套容斥化简
 ## Geometry
 
 ## Graph
@@ -169,10 +189,13 @@
 * 对于一类小球往 左/右 滚动并改变格子符号的问题，注意观察性质和找不变量
 #### UOJ951
 * 关心 $a_i+a_j \le w$ 的数对数量的计数，分讨 $a_i \le \lfloor \frac w 2 \rfloor$ 和 $a > \lfloor \frac w 2 \rfloor$ 
-#### CF1761G1/G2/G3
-* 询问 $\left|\left\{\lfloor\frac{p_i}{2} | i \in [l,r] \cap \mathbb{Z} \rfloor\right\}\right|, \text{p is a permutation}$ 等价于询问区间 $[l,r]$ 中的除以二下取整相同的匹配数 
 #### LuoguP3713
 * 方案数平方等价于两个人选同一个方案的选法
+#### LuoguP5396
+* 对于某个数列，$a_1 \dots a_k$ 可以成为它的最大前缀和的充要条件是 $a_1 \dots a_k$ 所有后缀和非负且 $a_{k+1}\dots a_n$ 的所有前缀和非正 
+#### CF1605F
+* 使用极长合法序列生成不合法序列然后容斥
+
 ## Randomize
 #### CF1578M
 * 保证数据随机且只需要给出正确率较高的方案，本地随机生成数据优化参数 (ML ???)

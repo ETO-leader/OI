@@ -1,0 +1,2 @@
+Type 107
+Collide with sensor 3.

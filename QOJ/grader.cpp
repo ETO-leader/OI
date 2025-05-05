@@ -1,72 +1,95 @@
-#include "workshop.h"
+#include <bits/stdc++.h>
+#include "Alice.h"
+#include "Bob.h"
 
-#include <array>
-#include <vector>
-#include <iostream>
-
-using std::array;
-using std::cin;
-using std::cout;
-using std::endl;
-using std::max;
-
-namespace {
-	void ensure(bool p, const char *err) {
-		if (!p) {
-			cout << err << endl;
-			exit(0);
-		}
-	}
+void error(const std::string &info){
+    std::cout << info << std::endl;
+    exit(0);
 }
 
-int main() {
-	int q;
-	cin >> q;
-	init();
-	for (int i = 0; i < q; i++) {
-		int n;
-		cin >> n;
-		std::vector<int> v(n);
-		for (int j = 0; j < n; j++) {
-			cin >> v[j];
+class AliceGrader{
+	int n;
+	long long X;
+	std::vector<std::pair<int,int>> V;
+public:
+	void Main(){
+		std::cin >> X;
+		if(X < 1 || X > 1000000000000000000ll){
+			error("Error: input value X is invalid.");
 		}
+		n = -1;
+		V = Alice();
+		if(n == -1){
+			error("Error: function setN() is not called by function Alice().");
+		}
+		if(V.size() != n - 1){
+			error("Error: number of edges returned by Alice() is not n-1.");
+		}
+		for(int i = 0;i < n - 1;++i){
+			if(V[i].first <= 0 || V[i].first > n || V[i].second <= 0 || V[i].second > n){
+				error("Error: edges returned by Alice() have invalid node.");
+			}
+		}
+		std::cout << n << std::endl;
+		for(int i = 0;i < n - 1;++i){
+			std::cout << V[i].first << " " << V[i].second << std::endl;
+		}
+	}
+	long long setN(int N){
+		if(n != -1){
+			error("Error: function setN() is called twice by function Alice().");
+		}
+		if(N < 2 || N > 5000){
+			error("Error: value N in function setN() is invalid.");
+		}
+		n = N;
+		return X;
+	}
+}aliceGrader;
 
-		{
-			std::vector<int> p = v;
-			for (int j = 0; j < n; j++) {
-				int a = p[j];
-				int b = p[(j + 1) % n];
-				v[j] = morning(a, b);
-				ensure(v[j] >= 0 && v[j] < 1'000'000'000, "Wrong Answer [1]");
+class BobGrader{
+	int n, m;
+	long long X;
+	std::vector<std::pair<int,int>> V;
+public:
+	void Main(){
+		std::cin >> n >> m;
+		if(n < 2 || n > 5000){
+			error("Error: input value n is invalid.");
+		}
+		if(m < n - 1 - (n - 2) / 2 || m > n - 1){
+			error("Error: input value m is invalid.");
+		}
+		V.resize(m);
+		for(int i = 0;i < m;++i){
+			std::cin >> V[i].first >> V[i].second;
+			if(V[i].first <= 0 || V[i].first > n || V[i].second <= 0 || V[i].second > n){
+				error("Error: input edges have invalid node.");
 			}
 		}
-		{
-			std::vector<int> p = v;
-			for (int j = 0; j < n; j++) {
-				int a = p[(j + n-1) % n];
-				int b = p[j];
-				int c = p[(j + 1) % n];
-				v[j] = afternoon(a, b, c);
-				ensure(v[j] >= 0 && v[j] < 1'000'000'000, "Wrong Answer [2]");
-			}
+		X = Bob(V);
+		if(X < 1 || X > 1000000000000000000ll){
+			error("Error: value X returned by Bob() is invalid.");
 		}
-		{
-			std::vector<int> p = v;
-			for (int j = 0; j < n; j++) {
-				int a = p[(j + n-1) % n];
-				int b = p[j];
-				int c = p[(j + 1) % n];
-				v[j] = evening(a, b, c);
-				ensure(v[j] >= 0 && v[j] < 40, "Wrong Answer [3]");
-			}
-		}
-		int ans = 0;
-		for (int j = 0; j < n; j++) {
-			ans = max(ans, v[j] + 1);
-			ensure(v[j] != v[(j + 1) % n], "Wrong Answer [4]");
-		}
-		cout << "Correct!" << endl;
-		cout << "m = " << ans << endl;
+		std::cout << X << std::endl;
+	}
+}bobGrader; 
+
+long long setN(int N){
+	return aliceGrader.setN(N);
+}
+
+int main(){
+	int T;
+	std::cin >> T;
+	if(T == 1){
+		aliceGrader.Main();
+	}
+	else if(T == 2){
+		bobGrader.Main();
+	}
+	else{
+		error("Error: input value T is invalid.");
 	}
 	return 0;
 }
