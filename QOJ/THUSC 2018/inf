@@ -1,0 +1,36 @@
+Type 666
+O=A+B
+O=O/O
+C=O*O
+D=O+O
+D=D*D
+D=D*D
+if B=Z jump 13
+if D=Z jump 13
+C=C*A
+B=B-O
+D=D-O
+if O=O jump 7
+X=C*O
+T=O+O
+D=O+O
+D=D*D
+D=D*D
+D=D*T
+D=D-O
+D=D-O
+C=Z*O
+F=O*O
+U=A/F
+V=B/F
+M=U/T
+N=V/T
+M=M*T
+N=N*T
+U=U-M
+V=V-N
+C=C+F
+F=F*T
+D=D-O
+Y=F*O
+end

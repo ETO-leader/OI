@@ -5,12 +5,14 @@ declare -i tc=0
 while (true)
 do
     tc=$tc+1
-    # clear
+    clear
     printf "Running... (%d)\n" $tc
-    python3 chk.py > inf
-    if !(cat inf | python3 testing-tool.py ./a.out)
+    pypy3 gen.py > inf
+    ./a.out < inf > ouf
+    ./test < inf > ans
+    if !(diff -w ouf ans)
     then
-        # clear
+        clear
         printf "wrong answer on test %d\n" $tc
         exit 0
     fi

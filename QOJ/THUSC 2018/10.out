@@ -1,0 +1,13 @@
+Type 667
+I=A/A
+Z=I-I
+X=I*I
+C=A*I
+if C=Z jump 11
+toss R
+P=I-R
+X=X*P
+C=C-I
+if Z=Z jump 5
+X=I-X
+end

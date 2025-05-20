@@ -1,22 +1,13 @@
 from random import randint
 
-N = 300000
-Q = 300000
+print(100)
 
-print(2)
+def gen():
+    n = 6
+    arr = [randint(1, i + 1) for i in range(n)]
+    print(n)
+    for i in arr: print(i, end = ' ')
+    print()
 
-print(N, Q)
-
-for i in range(N):
-    print(randint(0, 2), end = '')
-print()
-
-for i in range(N):
-    print(randint(0, 2), end = '')
-print()
-
-for i in range(Q):
-    xl = randint(0, N - 1)
-    yl = randint(0, N - 1)
-    ln = randint(1, N - max(xl, yl))
-    print(xl, yl, ln)
+for i in range(100):
+    gen()

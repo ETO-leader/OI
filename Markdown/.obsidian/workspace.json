@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "efb9f807380d8f1f",
+        "id": "afbed70edfed89a1",
         "type": "tabs",
         "children": [
           {
-            "id": "05443bf497fa3705",
+            "id": "b6b35ef71849bfc5",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Record.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Record"
+              "title": "新标签页"
             }
           }
         ]
@@ -166,11 +162,13 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "05443bf497fa3705",
+  "active": "2794ad49a12340c8",
   "lastOpenFiles": [
+    "Tasks/H9.2.3.7.md",
+    "Record.md",
+    "Tasks",
     "Yuhao Du's Sieve.md",
     "storage-1.md",
-    "Record.md",
     "Guessing Game Solution.md",
     "你 tmd 都到底是怎么挂的.md",
     "SXLK 2024.md",
@@ -193,7 +191,6 @@
     "2057F.md",
     "2055F.md",
     "1801G.md",
-    "cf914F.md",
     "7fa4",
     "Temp",
     "Solutions/Universal Online Judge",
