@@ -1,12 +1,22 @@
-import random
+import random as rng
 
-N = 100000
+T = 1
+n = 1024
 
-print(N, 0)
+print(T)
+print(n)
 
-a = [i for i in range(N)]
+for i in range(n):
+    print(rng.randint(0, 1), end = ' ')
+print()
 
-random.shuffle(a)
+arr = [0] * 16
 
-for i in a: print(i, end = ' ')
+for i in range(15):
+    arr.append(1)
+
+rng.shuffle(arr)
+
+for x in arr:
+    print(x, end = ' ')
 print()

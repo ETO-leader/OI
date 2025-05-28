@@ -125,7 +125,9 @@
         "generator": "cpp",
         "text_encoding": "cpp",
         "inf": "cpp",
-        "dynamic_bitset": "cpp"
+        "dynamic_bitset": "cpp",
+        "flat_map": "cpp",
+        "flat_set": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled",
     "problems.showCurrentInStatus": false,
