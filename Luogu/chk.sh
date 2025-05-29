@@ -9,7 +9,7 @@ do
     printf "Running... (%d)\n" $tc
     pypy3 gen.py > inf
     ./a.out < inf > ouf
-    ./test < inf > ans
+    ./chk < inf > ans
     if !(diff -w ouf ans)
     then
         clear
