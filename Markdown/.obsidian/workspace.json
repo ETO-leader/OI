@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "afbed70edfed89a1",
+        "id": "a506ba1cf93abd0e",
         "type": "tabs",
         "children": [
           {
-            "id": "b6b35ef71849bfc5",
+            "id": "0cf5cabccd4fc3ba",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Markdown Viewer.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "Markdown Viewer"
             }
           }
         ]
@@ -162,8 +166,9 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "2794ad49a12340c8",
+  "active": "0cf5cabccd4fc3ba",
   "lastOpenFiles": [
+    "Markdown Viewer.md",
     "Tasks/H9.2.3.7.md",
     "Record.md",
     "Tasks",
@@ -190,7 +195,6 @@
     "2062E2.md",
     "2057F.md",
     "2055F.md",
-    "1801G.md",
     "7fa4",
     "Temp",
     "Solutions/Universal Online Judge",
