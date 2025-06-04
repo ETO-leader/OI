@@ -102,7 +102,8 @@
 #### CF933D
 * 不幸遇到很难的式子题，不过答案可以证是多项式可以考虑暴力求解几项然后 Lagrange 插值
 #### CF891E
-- $$
+-
+ $$
  \sum\limits_{i\ge 0} (a_i-i)\frac{x^i}{i!}=\sum\limits_{i \ge 0} a_i\frac{x^i}{i!}-x\sum\limits_{i \ge 0} \frac{x^i}{i!}=a_ie^x-xe^x
  $$
 ## Combination
