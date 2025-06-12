@@ -1,0 +1,74 @@
+#include<bits/stdc++.h>
+#define cir(i,a,b) for(int i=a;i<b;++i)
+using namespace std;
+class bit{
+private:
+    vector<int> a;
+    static constexpr auto lowbit(auto x){return x&(-x);}
+public:
+    auto update(int u,int w){
+        for(++u;u;u-=lowbit(u)) a[u]+=w;
+    }
+    auto query(int u){
+        auto res=0;
+        for(++u;u<(int)(a.size());u+=lowbit(u)) res+=a[u];
+        return res;
+    }
+    bit(int _n):a(_n+1){}
+};
+auto invsum(vector<int> a){
+    bit tr(a.size());
+    auto cnt=(int64_t)(0);
+    for(auto&x:a){
+        cnt+=tr.query(x);
+        tr.update(x,1);
+    }
+    return cnt;
+}
+int main(){
+    ios::sync_with_stdio(false),cin.tie(nullptr);
+    int T;cin>>T;
+    while(T--) []{
+        int n,m;cin>>n>>m;
+        vector a(n,vector<int>(m));
+        for(auto&x:a) for(auto&i:x) cin>>i,--i;
+        const auto u=[&]{
+            vector<int64_t> cinv;
+            vector<int> ord(m);
+            cir(i,0,m) ord[a[0][i]]=i;
+            for(auto&x:a){
+                auto b=x;
+                for(auto&w:b) w=ord[w];
+                cinv.emplace_back(invsum(b));
+            }
+            return max_element(cinv.begin(),cinv.end())-cinv.begin();
+        }();
+        const auto[ans,invc]=[&]{
+            vector<int64_t> cinv;
+            vector<int> ord(m);
+            cir(i,0,m) ord[a[u][i]]=i;
+            for(auto&x:a){
+                auto b=x;
+                for(auto&w:b) w=ord[w];
+                cinv.emplace_back(invsum(b));
+            }
+            vector<int> rnk(n);
+            iota(rnk.begin(),rnk.end(),0);
+            sort(rnk.begin(),rnk.end(),[&](auto&a,auto&b){return cinv[a]<cinv[b];});
+            return pair(rnk,cinv);
+        }();
+        auto cost=[&](int x,int y){
+            vector<int> ord(m);
+            cir(i,0,m) ord[a[x][i]]=i;
+            auto b=a[y];
+            for(auto&i:b) i=ord[i];
+            return invsum(b);
+        };
+        cir(i,0,n-1) if(invc[ans[i]]+cost(ans[i],ans[i+1])!=invc[ans[i+1]]){
+            return cout<<-1<<'\n',void();
+        }
+        for(auto&i:ans) cout<<i+1<<' ';
+        cout<<'\n';
+    }();
+    return 0;
+}
