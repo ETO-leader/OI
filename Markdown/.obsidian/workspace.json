@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "a506ba1cf93abd0e",
+        "id": "3914ac32460a9be0",
         "type": "tabs",
         "children": [
           {
-            "id": "0cf5cabccd4fc3ba",
+            "id": "4617a498fb0699ef",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Guessing Game.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Guessing Game"
+              "title": "新标签页"
             }
           }
         ]
@@ -166,10 +162,10 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "0cf5cabccd4fc3ba",
+  "active": "4617a498fb0699ef",
   "lastOpenFiles": [
-    "Pasted image 20250606144927.png",
     "Guessing Game.md",
+    "Pasted image 20250606144927.png",
     "Markdown Viewer.md",
     "Tasks/H9.2.3.7.md",
     "Record.md",
