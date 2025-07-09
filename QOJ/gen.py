@@ -1,22 +1,17 @@
 import random as rng
 
-T = 1
-n = 1024
+__seed = rng.randint(11, 25119711)
 
-print(T)
+print(__seed)
+
+n = rng.randint(10 ** 5, 10 ** 5)
+
 print(n)
 
-for i in range(n):
-    print(rng.randint(0, 1), end = ' ')
-print()
+for i in range(3, n + 1):
+    print((i // 4) * 2 + (i % 2), i)
 
-arr = [0] * 16
+print(1, 2)
 
-for i in range(15):
-    arr.append(1)
+print(rng.randint(1, n), rng.randint(1, n))
 
-rng.shuffle(arr)
-
-for x in arr:
-    print(x, end = ' ')
-print()
