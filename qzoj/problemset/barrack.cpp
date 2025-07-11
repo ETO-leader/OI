@@ -1,4 +1,4 @@
-#include<bits/extc++.h>
+#include<bits/stdc++.h>
 #define cir(i,a,b) for(int i=a;i<b;++i)
 using namespace std;
 using lint=long long;
@@ -20,16 +20,20 @@ public:
 } math;
 class tree{
 private:
-    vector<vector<pair<int,lint>>> gr;
+    vector<vector<pair<int,int>>> gr;
     vector<int> siz,xdep;
-    auto init(int u,int f=-1,lint fw=-1)->int{
+    vector<tuple<int,int,int>> es;
+    auto init(int u,int f=-1)->int{
         siz[u]=1;xdep[u]=1;
-        if(f>-1) gr[u].erase(find(gr[u].begin(),gr[u].end(),make_pair(f,fw)));
-        for(auto&[v,w]:gr[u]) if(v!=f) siz[u]+=init(v,u,w),xdep[u]=max(xdep[u],xdep[v]+1);
+        for(auto&[v,w]:gr[u]) if(v!=f){
+            es.emplace_back(u,v,w);
+            siz[u]+=init(v,u);
+            xdep[u]=max(xdep[u],xdep[v]+1);
+        }
         return siz[u];
     }
     vector<lint> f;
-    lint ans;
+    lint ans,prew;
     vector<lint> wf;
     int cnt;
     auto allocw(int p){
@@ -37,22 +41,21 @@ private:
         cnt+=p;
         return res;
     }
-    const int k;
+    const int n,k;
     auto dfs(int u)->void{
         for(auto&[v,w]:gr[u]){
             dfs(v);
-            f[u]+=f[v]+siz[v]*w;
+            f[u]+=f[v]+1ll*siz[v]*w;
         }
     }
     auto check(int u,lint prew,vector<lint>::iterator w)->lint{
-        const auto n=(int)(gr.size());
         sort(gr[u].begin(),gr[u].end(),[&](auto a,auto b){
             return xdep[a.first]>xdep[b.first];
         });
         if(gr[u].empty()&&k==1) ans=min(ans,prew);
         if(gr[u].empty()) return *w=0,0ll;
-        auto ex=check(gr[u][0].first,prew+f[u]-f[gr[u][0].first]-siz[gr[u][0].first]*gr[u][0].second+(n-siz[gr[u][0].first])*gr[u][0].second,w+1);
-        ex+=f[u]-f[gr[u][0].first]-siz[gr[u][0].first]*gr[u][0].second;
+        auto ex=check(gr[u][0].first,prew+f[u]-f[gr[u][0].first]-1ll*siz[gr[u][0].first]*gr[u][0].second+1ll*(n-siz[gr[u][0].first])*gr[u][0].second,w+1);
+        ex+=f[u]-f[gr[u][0].first]-1ll*siz[gr[u][0].first]*gr[u][0].second;
         *w=f[u]-ex;
         if(k>1){
             if(xdep[u]>k-1) ans=min(ans,*(w+k-1)+prew+ex);
@@ -61,14 +64,14 @@ private:
         }
         cir(i,1,(int)(gr[u].size())){
             auto nw=wf.begin()+allocw(xdep[gr[u][i].first]);
-            const auto nex=check(gr[u][i].first,prew+f[u]-f[gr[u][i].first]-siz[gr[u][i].first]*gr[u][i].second+(n-siz[gr[u][i].first])*gr[u][i].second,nw);
+            const auto nex=check(gr[u][i].first,prew+f[u]-f[gr[u][i].first]-1ll*siz[gr[u][i].first]*gr[u][i].second+1ll*(n-siz[gr[u][i].first])*gr[u][i].second,nw);
             if(k>1) cir(udep,0,xdep[gr[u][i].first]){
                 if(k-2-udep>-1&&k-2-udep<xdep[u]){
-                    ans=min(ans,prew+*(nw+udep)+*(w+k-2-udep)+nex+ex-f[gr[u][i].first]-siz[gr[u][i].first]*gr[u][i].second);
+                    ans=min(ans,prew+*(nw+udep)+*(w+k-2-udep)+nex+ex-f[gr[u][i].first]-1ll*siz[gr[u][i].first]*gr[u][i].second);
                 }
             }
             cir(udep,0,xdep[gr[u][i].first]){
-                *(w+udep+1)=min(*(w+udep+1),*(nw+udep)+f[u]-f[gr[u][i].first]-siz[gr[u][i].first]*gr[u][i].second+nex-ex);
+                *(w+udep+1)=min(*(w+udep+1),*(nw+udep)+f[u]-f[gr[u][i].first]-1ll*siz[gr[u][i].first]*gr[u][i].second+nex-ex);
             }
         }
         return ex;
@@ -80,12 +83,14 @@ public:
     }
     auto check(){
         init(0);
+        for(auto&x:gr) x.clear();
+        for(auto&[u,v,w]:es) gr[u].emplace_back(v,w);
         dfs(0);
         allocw(xdep[0]);
         check(0,0,wf.begin());
         return ans;
     }
-    tree(int _n,int _k):gr(_n),siz(_n),f(_n),k(_k),ans(_infl),xdep(_n),wf(_n*2+7),cnt(0){}
+    tree(int _n,int _k):n(_n),gr(_n),siz(_n),f(_n),k(_k),ans(_infl),xdep(_n),wf(_n+7),cnt(0){}
 };
 int main(){
     ios::sync_with_stdio(false),cin.tie(nullptr);
