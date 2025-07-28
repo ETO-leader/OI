@@ -36,11 +36,10 @@ public:
     auto mark_path(int x){
         dfs(0);
         const auto ux=findroot();
-        if(x==ux[0]||(ux.size()>1&&x==ux[1])) return vector{x};
         const auto u=ux[0];
         dfs(u);
         vector<int> marks{x};
-        while(x!=u) marks.emplace_back(x=uf[x]);
+        while(!ranges::count(ux,x)) marks.emplace_back(x=uf[x]);
         return marks;
     }
 };
@@ -48,13 +47,15 @@ public:
 class bob_tree:public tree{
 private:
     using tree::tree;
-    auto move_until(int&x,const int u,map<int,int>&cnt){
+    auto move_until(int&x,const int u,map<int,int>&cnt,auto&vis){
         dfs(u);
         while(uf[x]>-1){
+            vis.emplace(x);
             if(cnt.contains(x)&&cnt[x]) return x;
             cnt[uf[x]]=visit(uf[x]+1);
             x=uf[x];
         }
+        vis.emplace(x);
         if(cnt.contains(x)&&cnt[x]) return x;
         return -1;
     }
@@ -73,38 +74,20 @@ public:
         cnt[x]=s;
         dfs(0);
         const auto ul=findroot();
-        auto u=move_until(x,ul[0],cnt);
-        if(u==-1) u=move_until(x,ul[1],cnt);
-        auto failed=false;
-        auto cx=0;
         unordered_set<int> vis;
+        auto u=move_until(x,ul[0],cnt,vis);
+        if(u==-1) u=move_until(x,ul[1],cnt,vis);
+        auto failed=false;
         while([&]{
             vis.emplace(u);
             const auto ux=sorted(u);
-            for(auto&i:ux) if(i!=ul[0]&&(ul.size()<2||i!=ul[1])){
+            for(auto&i:ux){
                 if(vis.contains(i)) continue;
-                if(ul.size()>1&&u==ul[0]&&i==ul[1]&&failed) continue;
                 if(visit(i+1)) return u=i,true;
-                cx+=2;
                 visit(u+1);
-            }
-            for(auto&i:ux) if(i==ul[0]||(ul.size()>1&&i==ul[1])){
-                if(vis.contains(i)) continue;
-                if(ul.size()>1&&u==ul[0]&&i==ul[1]&&failed) continue;
-                if(visit(i+1)) return u=i,true;
-                cx+=2;
-                visit(u+1);
-            }
-            if(ul.size()>1&&u==ul[1]){
-                failed=true;
-                if(visit(ul[0]+1)) return u=ul[0],true;
-                cx+=2;
-                visit(ul[1]+1);
             }
             return false;
         }());
-        cerr<<ul.size()<<" --> FAIL: "<<cx<<'\n';
-        assert(cx<31);
         return u;
     }
 };

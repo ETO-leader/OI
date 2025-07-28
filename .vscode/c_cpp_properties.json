@@ -13,7 +13,7 @@
             "windowsSdkVersion": "10.0.19041.0",
             "compilerPath": "/opt/gcc-15/bin/g++",
             "cStandard": "c23",
-            "cppStandard": "c++23",
+            "cppStandard": "c++26",
             "intelliSenseMode": "linux-gcc-x64"
         },
         {
@@ -29,7 +29,7 @@
             "windowsSdkVersion": "10.0.19041.0",
             "compilerPath": "/usr/bin/g++",
             "cStandard": "c23",
-            "cppStandard": "c++23",
+            "cppStandard": "c++26",
             "intelliSenseMode": "linux-gcc-x64"
         },
         {
@@ -45,7 +45,7 @@
             "windowsSdkVersion": "10.0.19041.0",
             "compilerPath": "/usr/bin/clang++",
             "cStandard": "c23",
-            "cppStandard": "c++23",
+            "cppStandard": "c++26",
             "intelliSenseMode": "linux-gcc-x64"
         }
     ],

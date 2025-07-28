@@ -19,6 +19,7 @@ public:
         cir(i,0,n) if(chs[nxt[i]]) res.emplace_back(nxt[i]);
         return res;
     }
+<<<<<<< HEAD
     auto mutate(auto&eng) const{
         auto mutated=*this;
         const int n=(int)(this->size());
@@ -27,6 +28,16 @@ public:
         while(i==j) j=dist(eng);
         std::swap(mutated[i],mutated[j]);
         return mutated;
+=======
+    auto mutation(auto&eng) const->method{
+        const auto n=(int)(this->size());
+        const auto u=uniform_int_distribution<int>(0,n-1)(eng);
+        const auto v=uniform_int_distribution<int>(0,n-1)(eng);
+        if(u==v) return mutation(eng);
+        auto res=*this;
+        std::swap(res[u],res[v]);
+        return res;
+>>>>>>> 58194679c4b1c64f6cbc756ed0046ea6cf16def7
     }
 };
 int main(int argc,char*argv[]){
@@ -51,7 +62,10 @@ int main(int argc,char*argv[]){
         vector<int> res{u};
         while(u!=v){
             cir(p,0,n) if(p!=u&&a[u][p]+f[p][v]==f[u][v]){
+<<<<<<< HEAD
                 assert(res.size()<1000);
+=======
+>>>>>>> 58194679c4b1c64f6cbc756ed0046ea6cf16def7
                 res.emplace_back(p);
                 u=p;
                 break;
@@ -64,6 +78,21 @@ int main(int argc,char*argv[]){
         cir(i,1,n) ans+=f[l[i-1]][l[i]];
         return ans;
     };
+<<<<<<< HEAD
+=======
+    auto genpath=[&](int u){
+        vector<int> vis(n);
+        vis[u]=true;
+        auto res=method{u};
+        cir(i,0,n-1){
+            auto mn=pair(numeric_limits<lint>::max(),-1);
+            cir(j,0,n) if(!vis[j]) mn=min(mn,pair(f[u][j],j));
+            res.emplace_back(mn.second);
+            vis[u=mn.second]=true;
+        }
+        return res;
+    };
+>>>>>>> 58194679c4b1c64f6cbc756ed0046ea6cf16def7
     auto write=[&](lint w,method x){
         cout<<w/1000000<<'\n';
         cir(i,1,n){
@@ -85,15 +114,30 @@ int main(int argc,char*argv[]){
         u.init(eng);
         cnt.emplace_back(cost(u),u);
     }
+<<<<<<< HEAD
     ranges::sort(cnt);
     cir(i,0,round_count){
+=======
+    cir(i,0,n){
+        const auto x=genpath(i);
+        cnt.emplace_back(cost(x),x);
+    }
+    ranges::sort(cnt);
+    cir(i,0,round_count){
+        if(!(i%100)) cerr<<"Stage: "<<i<<" answer: "<<cnt[0].first<<'\n';
+>>>>>>> 58194679c4b1c64f6cbc756ed0046ea6cf16def7
         cir(i,0,mate_count*0.7){
             const auto x=cnt[uniform_int_distribution<int>(0,(int)(cnt.size())-1)(eng)];
             const auto y=cnt[uniform_int_distribution<int>(0,(int)(cnt.size())-1)(eng)];
             const auto nx=x.second.mate(y.second,eng);
             cnt.emplace_back(cost(nx),nx);
+<<<<<<< HEAD
             const auto nxm=nx.mutate(eng);
             cnt.emplace_back(cost(nxm),nxm);
+=======
+            const auto mx=nx.mutation(eng);
+            cnt.emplace_back(cost(mx),mx);
+>>>>>>> 58194679c4b1c64f6cbc756ed0046ea6cf16def7
         }
         ranges::sort(cnt);
         shuffle(cnt.begin()+alive_count,cnt.end(),eng);
@@ -109,4 +153,7 @@ int main(int argc,char*argv[]){
     cerr<<"done.\n";
     return 0;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 58194679c4b1c64f6cbc756ed0046ea6cf16def7
