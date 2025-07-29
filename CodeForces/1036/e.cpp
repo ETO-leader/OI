@@ -38,7 +38,7 @@ int main(){
                 }
             }
             w=delta/2;
-            for(;i<=n;i++){
+            for(;i<n;i++){
                 if(a[i]<w){
                     w-=a[i];
                     cout<<a[i]<<' ';
