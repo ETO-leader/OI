@@ -43,6 +43,7 @@ int main(){
         graph gr(n);
         cir(i,0,m){
             int u,v;cin>>u>>v;--u;--v;
+            if(min(u,v)<0||max(u,v)>n-1) continue;
             gr.link(u,v);
         }
         cout<<gr.count()<<'\n';
