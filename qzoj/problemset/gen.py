@@ -1,9 +1,16 @@
-from random import randint
+import random as rng
 
-n = randint(1, 100)
+n = 50
+m = 50
 
-print(n, randint(1, n))
+print(n, m)
 
-for i in range(2, n + 1):
-    print(randint(1, i - 1), i, randint(1, 1000000))
+for i in range(n):
+    for j in range(m):
+        print('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890*-'[rng.randint(0, 63)], end = '')
+    print()
+
+for i in range(10000):
+    print('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890*-'[rng.randint(0, 63)], end = '')
+print()
 
