@@ -1,10 +1,6 @@
-0 4: 1 2
-0 7: 4 2
-0 8: 5 3
-1 5: 2 2
-1 8: 5 2
-2 6: 3 2
-3 7: 4 2
-4 8: 5 2
-0.00user 0.00system 0:00.01elapsed 31%CPU (0avgtext+0avgdata 15696maxresident)k
-256inputs+0outputs (1major+2097minor)pagefaults 0swaps
+1 0 6
+1 2 8
+0 2 10
+1 1 12
+0.00user 0.00system 0:00.00elapsed 87%CPU (0avgtext+0avgdata 9136maxresident)k
+8inputs+16outputs (0major+4163minor)pagefaults 0swaps
