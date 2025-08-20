@@ -1,17 +1,11 @@
 import random as rng
 
-N = 200000
-M = 1000000000
+N = 1000
+M = 3000
 
-print(N)
+print(N, M)
 
-for i in range(2, N + 1):
-    print(rng.randint(1, i - 1), i)
-
-Q = 5
-
-print(Q, M)
-
-for i in range(Q):
-    print(1, rng.randint(100, 100))
-
+for i in range(N):
+    for j in range(M):
+        print(rng.randint(0, 1), end = '')
+    print()
