@@ -30,20 +30,21 @@ public:
 };
 
 int main(){
-    auto n=500000;
+    auto n=5000;
     cerr<<"QwQ\n";
-    mt19937 eng(251);
+    mt19937 eng(random_device().operator()());
     vector<int64_t> d(n);
     for(auto&i:d) i=uniform_int_distribution<int>(0,1000000000)(eng);
-    // graph gr(n);
+    graph gr(n);
     sp spqwq(d,0);
-    // cir(i,0,n) cir(j,0,n) gr.link(i,(i+j)%n,d[j]);
+    cir(i,0,n) cir(j,0,n) gr.link(i,(i+j)%n,d[j]);
     // assert(spqwq.calc(0,n-1));
-    // const auto gdis=gr.sp(0);
+    const auto gdis=gr.sp(0);
     auto ans=0ll;
     cir(i,0,n){
-        if(!(i%10000)) cerr<<i<<'\n';
-        ans^=spqwq.calc(i);
+        // if(!(i%10000)) cerr<<i<<'\n';
+        // ans^=spqwq.calc(i);
+        assert(spqwq.calc(i)==gdis[i]);
     }
-    cerr<<ans<<'\n';
+    // cerr<<ans<<'\n';
 }
