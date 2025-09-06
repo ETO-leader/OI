@@ -1,0 +1,13 @@
+#include<bits/stdc++.h>
+#define cir(i,a,b) for(int i=a;i<b;++i)
+using namespace std;
+using lint=long long;
+class segment{
+private:
+    
+};
+int main(){
+    ios::sync_with_stdio(false),cin.tie(nullptr);
+
+    return 0;
+}

@@ -38,7 +38,7 @@ public:
         for(unusual=false;!unusual;res+=dfs(s,t,_infl));
         return res;
     }
-    dinic(int n):gr(n),gap(n),dist(n),cur(n){}
+    dinic(int n):gr(n),gap(n+7),dist(n),cur(n){}
 };
 class nodegen{
 private:
