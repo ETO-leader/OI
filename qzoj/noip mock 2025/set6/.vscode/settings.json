@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "deque": "cpp",
+        "vector": "cpp",
+        "random": "cpp",
+        "tuple": "cpp",
+        "ostream": "cpp",
+        "array": "cpp",
+        "bit": "cpp"
+    }
+}
