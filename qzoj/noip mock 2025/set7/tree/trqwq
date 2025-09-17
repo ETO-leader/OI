@@ -1,0 +1,114 @@
+#pragma GCC optimize("Ofast")
+#include<bits/stdc++.h>
+#define cir(i,a,b) for(auto i=a;i<b;++i)
+using namespace std;
+using lint=long long;
+static constexpr auto MOD=998244353;
+class tree{
+private:
+    vector<vector<int>> gr;
+    vector<vector<lint>> fx;
+    vector<int> siz;
+    auto dfs(int u,int f=-1)->vector<lint>{
+        siz[u]=1;
+        vector<vector<lint>> nf;
+        for(auto&i:gr[u]) if(i!=f){
+            nf.emplace_back(dfs(i,u));
+            siz[u]+=siz[i];
+        }
+        vector<lint> uf(siz[u]+1);
+        uf[1]=1;
+        auto ux=1;
+        for(auto&g:nf){
+            const auto h=uf;
+            ux+=(int)(g.size())-1;
+            fill(uf.begin(),uf.end(),0);
+            cir(i,0,(int)(g.size())){
+                cir(x,0,ux+1){
+                    (uf[x]+=h[x]*g[i])%=MOD;
+                }
+                cir(x,i+1,ux+1){
+                    (uf[x]+=h[x-i]*g[i])%=MOD;
+                }
+            }
+        }
+        return fx[u]=uf;
+    }
+    auto check(int u,int f=-1){
+        
+    }
+public:
+    auto link(int u,int v){
+        gr[u].emplace_back(v);
+        gr[v].emplace_back(u);
+    }
+    auto init(const int u){
+        const auto n=(int)(gr.size());
+        vector<vector<lint>> vg;
+        for(auto&i:gr[u]) vg.emplace_back(dfs(i,u));
+        auto ans=0ll;
+        [&]{
+            vector<lint> f(n+1);
+            f[1]=1;
+            cir(c,0,(int)(gr[u].size())){
+                auto&g=vg[c];
+                const auto h=f;
+                fill(f.begin(),f.end(),0);
+                cir(x,0,(int)(g.size())){
+                    cir(w,x,n+1) (f[w]+=h[w-x]*g[x])%=MOD;
+                    cir(w,0,n+1) (f[w]+=h[w]*g[x])%=MOD;
+                }
+            }
+            ans=accumulate(f.begin(),f.end(),0ll)%MOD;
+        }();
+        vector<vector<lint>> pg(gr[u].size()),sg(gr[u].size());
+        [&]{
+            vector<lint> f(n+1);
+            f[1]=1;
+            cir(i,0,(int)(gr[u].size())){
+                pg[i]=f;
+                auto&g=vg[i];
+                const auto h=f;
+                fill(f.begin(),f.end(),0);
+                cir(x,0,(int)(g.size())){
+                    cir(w,x,n+1) (f[w]+=h[w-x]*g[x])%=MOD;
+                    cir(w,0,n+1) (f[w]+=h[w]*g[x])%=MOD;
+                }
+            }
+            fill(f.begin(),f.end(),0);
+            f[0]=1;
+            for(auto i=(int)(gr[u].size())-1;~i;--i){
+                sg[i]=f;
+                auto&g=vg[i];
+                const auto h=f;
+                fill(f.begin(),f.end(),0);
+                cir(x,0,(int)(g.size())){
+                    cir(w,x,n+1) (f[w]+=h[w-x]*g[x])%=MOD;
+                    cir(w,0,n+1) (f[w]+=h[w]*g[x])%=MOD;
+                }
+            }
+        }();
+        cir(i,0,(int)(gr[u].size())){
+            vector<lint> f(n+1);
+            cir(x,0,n+1) cir(y,0,n-x+1) (f[x+y]+=pg[i][x]*sg[i][y])%=MOD;
+            cir(sz,1,n+1){
+                const auto lim=sz/2;
+                cir(w,lim+1,min((int)(vg[i].size()),sz)) (ans+=MOD-vg[i][w]*f[sz-w]%MOD)%=MOD;
+            }
+        }
+        return ans;
+    }
+    tree(int _n):gr(_n),fx(_n),siz(_n){}
+};
+int main(){
+    ios::sync_with_stdio(false),cin.tie(nullptr);
+    int n;cin>>n;tree gr(n);
+    cir(i,0,n-1){
+        int u,v;cin>>u>>v;--u;--v;
+        gr.link(u,v);
+    }
+    auto ans=0ll;
+    cir(i,0,n) (ans+=gr.init(i)*(i+1))%=MOD;
+    cout<<ans<<'\n';
+    return 0;
+}
