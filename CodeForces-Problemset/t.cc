@@ -1,40 +1,90 @@
-#include<bits/stdc++.h> 
-using namespace std;
-const int N=81;
-int a[N][N];
-vector<pair<int,int>> e;
-void add(int x,int y){
-    e.push_back({x,y});
-}
-void make_matrix(int n){
-    for(int i=2;i<n;++i) a[i][i]=1;
-    a[n][1]=1;
-    for(auto [x,y]:e) a[x][y]=-1;
-}
-int main(){
-    int _; scanf("%d",&_); //cin>>_;
-    int max_bit=15;
-    while(_--){
-        memset(a,0,sizeof(a)); e.clear();
-        int n=1;
-        for(int i=0;i<max_bit;++i){
-            add(n,n+1); add(n+1,n+2); add(n+2,n+3); add(n+3,n+4);
-            add(n+1,n+3); add(n+2,n+4);
-            n+=4;
-        }
-        int x,bit_1=1,bit_2=4; scanf("%d",&x); ++n;
-        for(int i=0;i<max_bit;++i){
-            if (x%3==1) add(bit_1,n),add(n,n+1),++n;
-            if (x%3==2) add(bit_2,n),add(n,n+1),++n;
-            bit_1+=4; bit_2+=4; x/=3;
-        }
-        make_matrix(n);
-        cout << n <<'\n';
-        for (int r = 1; r <= n; r++) {
-            for (int c = 1; c <= n; c++) {
-                printf("%d ",a[r][c]);
-            }
-            cout << '\n';
+#include <bits/stdc++.h>
+ 
+using u32 = unsigned;
+using i64 = long long;
+using u64 = unsigned long long;
+ 
+void solve() {
+    int n;
+    std::cin >> n;
+    
+    std::vector d(n - 1, std::vector<int>(n));
+    std::mt19937 rng;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n; j++) {
+            std::cin >> d[i][j];
         }
     }
+    std::vector r(n, std::vector<int>(n - 1));
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n - 1; j++) {
+            std::cin >> r[i][j];
+        }
+    }
+    
+    const int h = 2 * (n - 1) / 3;
+    int ans = 0;
+    std::vector<std::vector<i64>> f(n);
+    auto dfs1 = [&](auto self, int x, int y, i64 mask) -> void {
+        if (x + y == h) {
+            f[x].push_back(mask);
+            return;
+        }
+        if (x + 1 < n) {
+            self(self, x + 1, y, mask);
+            if (~mask >> d[x][y] & 1) {
+                self(self, x + 1, y, mask | 1LL << d[x][y]);
+            }
+        }
+        if (y + 1 < n) {
+            self(self, x, y + 1, mask);
+            if (~mask >> r[x][y] & 1) {
+                self(self, x, y + 1, mask | 1LL << r[x][y]);
+            }
+        }
+    };
+    dfs1(dfs1, 0, 0, 0LL);
+    
+    for (int x = 0; x < n; x++) {
+        std::sort(f[x].begin(), f[x].end());
+        f[x].erase(std::unique(f[x].begin(), f[x].end()), f[x].end());
+        std :: cerr<<x<<": "<<f[x].size()<<'\n';
+    }
+    
+    auto dfs2 = [&](auto self, int x, int y, i64 mask) -> void {
+        if (x + y == h) {
+            for (int s = ans + 1; s <= 2 * n - 2; s++) {
+                i64 need = ((1LL << s) - 1) & ~mask;
+                if (std::binary_search(f[x].begin(), f[x].end(), need)) {
+                    ans = s;
+                } else {
+                    break;
+                }
+            }
+            return;
+        }
+        if (x > 0) {
+            self(self, x - 1, y, mask | 1LL << d[x - 1][y]);
+        }
+        if (y > 0) {
+            self(self, x, y - 1, mask | 1LL << r[x][y - 1]);
+        }
+    };
+    dfs2(dfs2, n - 1, n - 1, 0LL);
+    
+    std::cout << ans << "\n";
+}
+ 
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    
+    int t;
+    std::cin >> t;
+    
+    while (t--) {
+        solve();
+    }
+    
+    return 0;
 }

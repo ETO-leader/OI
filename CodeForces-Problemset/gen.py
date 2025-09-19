@@ -1,15 +1,14 @@
 from random import randint
 
-N = 100000
+N = 20
 
-def main():
-    print(N)
-    for i in range(N):
-        print(randint(1, 200000), end=' ')
-    print()
-    print(N)
-    for i in range(N):
-        print(randint(1, N), randint(1, N), end=' ')
+print(1)
 
-if __name__ == '__main__':
-    main()
+print(N)
+
+for i in range(N - 1):
+    print(*[randint(0, N * 2 - 1) for _ in range(N)])
+
+for i in range(N):
+    print(*[randint(0, N * 2 - 1) for _ in range(N - 1)])
+
