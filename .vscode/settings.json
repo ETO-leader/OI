@@ -127,7 +127,9 @@
         "inf": "cpp",
         "dynamic_bitset": "cpp",
         "flat_map": "cpp",
-        "flat_set": "cpp"
+        "flat_set": "cpp",
+        "rb_tree": "cpp",
+        "cassert": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled",
     "problems.showCurrentInStatus": false,
